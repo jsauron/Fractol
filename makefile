@@ -9,21 +9,11 @@
 #    Updated: 2018/08/11 21:35:47 by jsauron          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
- NAME = fdf
+ NAME = fractol
 
  SRCS_DIR = srcs/
 
  SRC = srcs/main.c \
-	srcs/matrice.c \
-	srcs/calc_matrice.c \
-	srcs/hook.c \
-	srcs/parsing.c \
-	srcs/drawing.c \
-	srcs/error.c \
-	srcs/image.c \
-	srcs/tools.c \
-	srcs/color.c \
-	srcs/init.c
 
 OBJS = $(SRC:.c=.o)
 
