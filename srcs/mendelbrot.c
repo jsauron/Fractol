@@ -5,7 +5,6 @@ void	init_mendel(t_env *e, t_fractal *fractal, t_point *point, t_img *image)
 {
 	int	x;
 	int	y;
-	int	it_max;
 	double	x1;
 	double	x2;
 	double	y1;
@@ -14,7 +13,6 @@ void	init_mendel(t_env *e, t_fractal *fractal, t_point *point, t_img *image)
 	double	img_y;
 	int	zoom;
 
-	it_max = 50;
         x1 = -2.1;
         x2 = 0.6;
         y1 = -1.2;
@@ -52,6 +50,7 @@ void	calc_mendel(t_env *e, t_fractal *fractal, t_point *point, t_img *image)
 	c_i = point->y;
 	z_r = 0;
 	z_i = 0;
+	fractal->it_max = 50;
 	{
 		tmp = z_r;
 		z_r = z_r * z_r - z_i*z_i + c_r;
