@@ -46,15 +46,14 @@
 
 typedef struct		s_point
 {
-	double		x;
-	double		y;
+	int		x;
+	int		y;
 
 }			t_point;
 
 typedef struct           s_fractal
 {
 	int		it_max;
-	double		i;
 	double		c_r;
 	double		c_i;
 	double		z_r;
@@ -71,7 +70,6 @@ typedef struct           s_fractal
 	int		it_bleu;
 	double		img_x;
 	double		img_y;
-	double		tmp;
 
 }                       t_fractal;
 
@@ -93,7 +91,7 @@ typedef	struct		s_env
 	void		*win;
 	char		*name;
 	t_img		image;
-	t_fractal	fractal;
+	t_fractal	ftl;
 	t_point		point;
 
 }			t_env;
