@@ -13,7 +13,7 @@ void	init_mendel(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
 	point->y = 0;
 	init_img(e);
 	printf("%d\n", point->y);
-	printf("%f\n", ftl->img_y);
+	printf("%d\n", ftl->img_y);
 	while (point->y <= ftl->img_y)
 	{
 		printf("f");

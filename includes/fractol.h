@@ -68,8 +68,8 @@ typedef struct           s_fractal
 	int		it_rouge;
 	int		it_vert;
 	int		it_bleu;
-	double		img_x;
-	double		img_y;
+	int		img_x;
+	int		img_y;
 
 }                       t_fractal;
 

@@ -30,7 +30,7 @@ void	init_win(t_env *e)
 
 void	init_img(t_env *e)
 {
-	e->image.img = mlx_new_image(e->mlx, e->fractal.img_x, e->fractal.img_y);
+	e->image.img = mlx_new_image(e->mlx, e->ftl.img_x, e->ftl.img_y);
 	e->image.data = (int *)mlx_get_data_addr(e->image.img,
 			&e->image.bpp, &e->image.size_l, &e->image.endian);
 }
