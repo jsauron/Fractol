@@ -93,7 +93,7 @@ typedef	struct		s_env
 	t_img		image;
 	t_fractal	ftl;
 	t_point		point;
-
+	int		number;
 }			t_env;
 
 /*
@@ -101,6 +101,8 @@ typedef	struct		s_env
 */
 
 void	check_fractal(int ac, char **av, t_env *e);
+void	get_number(t_env *e, char **av);
+void	init_fractal(t_env *e);
 void	init_win(t_env *e);
 void	init_img(t_env *e);
 void	exit_win(t_env *e);
@@ -119,7 +121,7 @@ void	image_err(void);
 
 void	init_mendel(t_env *e, t_fractal *fractal, t_point *point, t_img *image);
 void	calc_mendel(t_env *e, t_fractal *fractal, t_point *point, t_img *image);
-void	draw_mendel(t_fractal *fractal, t_point *point, t_img *image);
+void	draw_mendel(t_env *e, t_fractal *fractal, t_point *point, t_img *image);
 
 /*
 **	drawing.c

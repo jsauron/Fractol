@@ -16,16 +16,31 @@ void	check_fractal(int ac, char **av, t_env *e)
 {
 	if (ac != 2)
 		arg_invalid();
-	if (ft_strcmp(av[1], "julia") != 0 || ft_strcmp(av[1], "mendelbrot") != 0)
+	if (ft_strcmp(av[1], "julia") == 0 || ft_strcmp(av[1], "mendelbrot") == 0)
+	{
 		e->name = av[1];
+		get_number(e, av);
+	}
 	else 
 		arg_invalid(); 
+}
+
+void	get_number(t_env *e, char **av)
+{
+	if (ft_strcmp(av[1], "mendelbrot") == 0)
+		e->number = 1;	
+}
+
+void	init_fractal(t_env *e)
+{
+	if (e->number == 1)
+		init_mendel(e, &e->ftl, &e->point,  &e->image);
 }
 
 void	init_win(t_env *e)
 {
 	e->mlx = mlx_init();
-	e->win = mlx_new_window(e->mlx, WIN_L, WIN_H, e->name);
+	e->win = mlx_new_window(e->mlx, e->ftl.img_x, e->ftl.img_y, e->name);
 }
 
 void	init_img(t_env *e)

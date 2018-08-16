@@ -17,9 +17,10 @@ int		main(int ac, char **av)
 	t_env	e;
 
 	check_fractal(ac, av, &e);
+	init_fractal(&e);
 	init_win(&e);
-//	init_img(&e);
-	//clear_img(&e);
+	init_img(&e);
+//	clear_img(&e);
 	draw_fractal(&e);
 //	mlx_hook(e.win, 2, 0, key, &e);
 	mlx_loop(e.mlx);
