@@ -14,6 +14,12 @@
  SRCS_DIR = srcs/
 
  SRC = srcs/main.c \
+	srcs/hook.c \
+	srcs/drawing.c \
+	srcs/error.c \
+	srcs/image.c \
+	srcs/init.c \
+	srcs/mendelbrot.c
 
 OBJS = $(SRC:.c=.o)
 
@@ -21,7 +27,7 @@ INCLUDES = includes/
 
 MLX = -L ./minilibx_macos -lmlx -framework OpenGL -framework AppKit
 
-DONE = "\033[35m FDF DISPLAY MAP\033[0m"
+DONE = "\033[35m Fractol ready\033[0m"
 
 all: lib $(NAME)
 
