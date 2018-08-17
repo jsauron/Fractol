@@ -15,13 +15,10 @@ void	init_mendel(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
 void	draw_mendel(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
 {
 	point->y = 0;
-	printf("%d\n", point->y);
-	printf("%d\n", ftl->img_y);
-	while (point->y <= ftl->img_y)
+	while (point->y < ftl->img_y)
 	{
-		printf("f");
 		point->x = 0;	
-		while (point->x <= ftl->img_x)
+		while (point->x < ftl->img_x)
 		{	
 			calc_mendel(e, ftl, point, image);
 			point->x++;	
@@ -37,20 +34,25 @@ void	calc_mendel(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
 	
 	i = 0;
 	tmp = 0;
-	ftl->c_r = point->x;
-	ftl->c_i = point->y;
+	ftl->c_r = (float)point->x / ftl->zoom + ftl->x1;
+	ftl->c_i = (float)point->y / ftl->zoom + ftl->y1;
 	ftl->z_r = 0;
 	ftl->z_i = 0;
 	ftl->it_max = 50;
+	while (((pow(ftl->z_r, 2) + pow(ftl->z_i, 2)) < 4) && i < ftl->it_max)
 	{
 		tmp = ftl->z_r;
-		ftl->z_r = sqrt(ftl->z_r) - sqrt(ftl->z_i) + ftl->c_r;
+		ftl->z_r = (pow(ftl->z_r, 2)) - (pow(ftl->z_i, 2)) + ftl->c_r;
 		ftl->z_i = 2 * ftl->z_i * tmp + ftl->c_i;
 		i++;
 	}
 	if (i == ftl->it_max)
 	{
-		printf("p");		
-		set_pixel_img(&e->image, point->x, point->y, RED);
+		printf("p\n");
+		printf("x = %d\n", point->x);
+		 printf("y = %d\n", point->y);
+		 printf("img_x = %d\n", ftl->img_x);
+		 printf("img_y = %d\n", ftl->img_y);		
+		set_pixel_img(e, point, RED);
 	}	
 }

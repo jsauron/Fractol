@@ -139,6 +139,6 @@ void	key(int key, t_env *e);
 **	image.c
 */
 
-void	set_pixel_img(t_img *image, double x, double y, int color);
+void	set_pixel_img(t_env *e, t_point *point, int color);
 void	clear_img(t_env *e);
 #endif

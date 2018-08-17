@@ -32,7 +32,7 @@ DONE = "\033[35m Fractol ready\033[0m"
 all: lib $(NAME)
 
 $(NAME):$(OBJS)
-	@gcc  -Wall -Wextra -Werror -o $(NAME) libft/libft.a $(OBJS) -I $(INCLUDES) $(MLX)
+	@gcc  -fsanitize=address -Wall -Wextra -Werror -o $(NAME) libft/libft.a $(OBJS) -I $(INCLUDES) $(MLX)
 	@echo $(DONE)
 
 lib:
