@@ -47,12 +47,7 @@ void	calc_mendel(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
 		i++;
 	}
 	if (i == ftl->it_max)
-	{
-		printf("p\n");
-		printf("x = %d\n", point->x);
-		 printf("y = %d\n", point->y);
-		 printf("img_x = %d\n", ftl->img_x);
-		 printf("img_y = %d\n", ftl->img_y);		
 		set_pixel_img(e, point, RED);
-	}	
+	else
+		set_pixel_img(e, point, i * RED / ftl->it_max);
 }
