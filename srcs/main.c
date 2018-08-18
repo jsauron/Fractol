@@ -21,7 +21,7 @@ int		main(int ac, char **av)
 	init_win(&e);
 	init_img(&e);
 //	clear_img(&e);
-	draw_fractal(&e);
-//	mlx_hook(e.win, 2, 0, key, &e);
+	draw(&e, &e.ftl, &e.point, &e.image);
+	mlx_hook(e.win, 2, 0, key, &e);
 	mlx_loop(e.mlx);
 }

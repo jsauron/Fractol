@@ -44,6 +44,8 @@
 # define WIN_L 500
 # define WIN_H 500
 
+# define K_ESC 53
+
 typedef struct		s_point
 {
 	int		x;
@@ -53,6 +55,8 @@ typedef struct		s_point
 
 typedef struct           s_fractal
 {
+	int		i;
+	double		tmp;
 	int		it_max;
 	double		c_r;
 	double		c_i;
@@ -63,7 +67,6 @@ typedef struct           s_fractal
 	double		y1;
 	double		y2;
 	int		zoom;
-	double		z;
 	int		color;
 	int		it_rouge;
 	int		it_vert;
@@ -120,14 +123,26 @@ void	image_err(void);
 */
 
 void	init_mendel(t_env *e, t_fractal *fractal, t_point *point, t_img *image);
-void	calc_mendel(t_env *e, t_fractal *fractal, t_point *point, t_img *image);
-void	draw_mendel(t_env *e, t_fractal *fractal, t_point *point, t_img *image);
+void	calc_fractal(t_env *e, t_fractal *fractal, t_point *point, t_img *image);
+void    init_mendel_2(t_env *e, t_fractal *fractal, t_point *point, t_img *image);
+/*
+**      mandelbrot.c
+*/
 
+void	init_julia(t_env *e, t_fractal *fractal, t_point *point, t_img *image);
+void    init_julia_2(t_env *e, t_fractal *fractal, t_point *point, t_img *image);
 /*
 **	drawing.c
 */
+void    draw_fractal(t_env *e);
 
-void	draw_fractal(t_env *e);
+
+/*
+**      fractol.c
+*/
+
+void	draw(t_env *e, t_fractal *ftl, t_point *point, t_img *image);
+void    init_mendel_2(t_env *e, t_fractal *ftl, t_point *point, t_img *image);
 
 /*
 **	hook.c

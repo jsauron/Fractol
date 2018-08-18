@@ -19,7 +19,7 @@
 	srcs/error.c \
 	srcs/image.c \
 	srcs/init.c \
-	srcs/mendelbrot.c
+	srcs/init_fractal.c
 
 OBJS = $(SRC:.c=.o)
 
