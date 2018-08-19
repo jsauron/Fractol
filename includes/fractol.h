@@ -36,6 +36,7 @@
 # define PINK 16754943
 # define WHITE 16514043
 # define CYAN 6881279
+# define BLACK 0
 
 /*
 **	Params
@@ -45,6 +46,7 @@
 # define WIN_H 500
 
 # define K_ESC 53
+# define K_COLOR 257
 
 typedef struct		s_point
 {
@@ -68,12 +70,20 @@ typedef struct           s_fractal
 	double		y2;
 	int		zoom;
 	int		color;
-	int		it_rouge;
-	int		it_vert;
-	int		it_bleu;
+	int		it_red;
+	int		it_green;
+	int		it_blue;
 	int		img_x;
 	int		img_y;
-
+	int		**pxl_red;
+	int		**pxl_green;
+	int		**pxl_blue;
+	int		***pxl_tmp;
+	int		it_max_red;
+	int		it_max_green;
+	int		it_max_blue;
+	int		zoom_x;
+	int		zoom_y;		
 }                       t_fractal;
 
 typedef struct  s_img
@@ -97,6 +107,8 @@ typedef	struct		s_env
 	t_fractal	ftl;
 	t_point		point;
 	int		number;
+	int		color1;
+	int		color2;
 }			t_env;
 
 /*
@@ -143,7 +155,7 @@ void    draw_fractal(t_env *e);
 
 void	draw(t_env *e, t_fractal *ftl, t_point *point, t_img *image);
 void    init_mendel_2(t_env *e, t_fractal *ftl, t_point *point, t_img *image);
-
+void	init_buddhabrot(t_env *e, t_fractal *ftl, t_point *point, t_img *image);
 /*
 **	hook.c
 */
@@ -153,7 +165,11 @@ void	key(int key, t_env *e);
 /*
 **	image.c
 */
-
-void	set_pixel_img(t_env *e, t_point *point, int color);
+int long	rgb(int r, int g, int b);
+void	set_pxl_tab(t_fractal *ftl);
+void	set_pixel_img(t_env *e, int x, int y, int color);
 void	clear_img(t_env *e);
+void	get_color(t_env *e);
+void	change_color(t_env *e);
+
 #endif

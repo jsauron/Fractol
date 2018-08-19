@@ -16,7 +16,7 @@ void	check_fractal(int ac, char **av, t_env *e)
 {
 	if (ac != 2)
 		arg_invalid();
-	if (ft_strcmp(av[1], "julia") == 0 || ft_strcmp(av[1], "mendelbrot") == 0)
+	if (ft_strcmp(av[1], "julia") == 0 || ft_strcmp(av[1], "mendelbrot") == 0 || ft_strcmp(av[1], "buddha") == 0)
 	{
 		e->name = av[1];
 		get_number(e, av);
@@ -31,6 +31,8 @@ void	get_number(t_env *e, char **av)
 		e->number = 1;	
 	if (ft_strcmp(av[1], "julia") == 0)
 		e->number = 2;
+	if (ft_strcmp(av[1], "buddha") == 0)
+		e->number = 3;
 }
 
 void	init_win(t_env *e)
