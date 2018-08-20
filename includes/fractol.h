@@ -47,6 +47,9 @@
 
 # define K_ESC 53
 # define K_COLOR 257
+# define K_CLIK 1
+# define K_UP 5
+# define K_DOWN 4
 
 typedef struct		s_point
 {
@@ -161,6 +164,9 @@ void	init_buddhabrot(t_env *e, t_fractal *ftl, t_point *point, t_img *image);
 */
 
 int	key(int key, t_env *e);
+int	motion_notify(int x, int y, t_env *e);
+int	button_press(int key, int x, int y, t_env *e);
+int	destroy_notify(t_env *e);
 
 /*
 **	image.c
