@@ -9,3 +9,14 @@ int		key(int key, t_env *e)
 	printf("%d\n", key);
 	return (0);
 }
+
+int		motion_notify(int x, int y, t_env *e)
+{
+	return (0);
+}
+
+int		button_press(int key, int x, int y, t_env *e)
+{
+		printf("%d\n", key);
+	return (0);
+}
