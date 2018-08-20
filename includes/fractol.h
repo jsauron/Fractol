@@ -89,13 +89,13 @@ typedef struct           s_fractal
 typedef struct  s_img
 {
         void            *img;
-        int                     *data;
         int                     size_l;
         int                     bpp;
         int                     bppx;
         int                     endian;
         int                     x;
         int                     y;
+        int                     *data;
 }                               t_img;
 
 typedef	struct		s_env
@@ -103,12 +103,12 @@ typedef	struct		s_env
 	void		*mlx;
 	void		*win;
 	char		*name;
-	t_img		image;
 	t_fractal	ftl;
 	t_point		point;
 	int		number;
 	int		color1;
 	int		color2;
+	t_img		image;
 }			t_env;
 
 /*
@@ -160,7 +160,7 @@ void	init_buddhabrot(t_env *e, t_fractal *ftl, t_point *point, t_img *image);
 **	hook.c
 */
 
-void	key(int key, t_env *e);
+int	key(int key, t_env *e);
 
 /*
 **	image.c

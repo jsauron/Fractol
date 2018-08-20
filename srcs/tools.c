@@ -27,17 +27,17 @@ void	get_color(t_env *e)
 		e->color2 = BLACK;
 		e->color1 = WHITE;
 	}
-	if (c == 1)
+	else if (c == 1)
 	{
 		e->color1 = rgb(e->ftl.i * 255/e->ftl.it_max, 0, 0);
 		e->color2 = BLACK;
 	}
-	if (c == 2)
+	else if (c == 2)
 	{
 		e->color1 = rgb(0, 0 ,e->ftl.i * 255/e->ftl.it_max);
 		e->color2 = CYAN;
 	}
-	if (c == 3)
+	else if (c == 3)
 	{
 		e->color1 = rgb(0, e->ftl.i * 255/ e->ftl.it_max, 0);
 		e->color2 = e->ftl.i * RED;

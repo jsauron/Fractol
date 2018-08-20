@@ -17,17 +17,14 @@ int		main(int ac, char **av)
 	t_env	e;
 
 	check_fractal(ac, av, &e);
-	printf("0\n");
-//	get_color(&e);
-	printf("color\n");
+	get_color(&e);
 	init_fractal(&e);
 	init_win(&e);
-	printf("1\n");
 	init_img(&e);
-	printf("2\n");
 //	clear_img(&e);
 	draw(&e, &e.ftl, &e.point, &e.image);
-	printf("3\n");
+	mlx_hook(e.win, 2, 0, key, &e);
+	mlx_hook(e.win, 2, 0, key, &e);
 	mlx_hook(e.win, 2, 0, key, &e);
 	mlx_loop(e.mlx);
 }

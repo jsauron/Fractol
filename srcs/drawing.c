@@ -9,6 +9,7 @@ void	draw(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
 	p = 0;
 	q = 0;
 */
+	point->y = 0;
         while (point->y < ftl->img_y)
         {
                 point->x = 0;
@@ -38,9 +39,9 @@ void	draw(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
 void    calc_fractal(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
 {
 	if (e->number == 1)
-		init_mendel_2(e, ftl, point, image);
-	if (e->number == 2)
-		init_julia_2(e, ftl, point, image);
+                init_mendel_2(e, ftl, point, image);
+        if (e->number == 2)
+                init_julia_2(e, ftl, point, image);
 	//if (e->number == 3)
 	//	init_buddhabrot(e, ftl, point, image);	
         while (((pow(ftl->z_r, 2) + pow(ftl->z_i, 2)) < 4) && ftl->i < ftl->it_max)
@@ -58,7 +59,7 @@ void    calc_fractal(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
         if (ftl->i == ftl->it_max)
 	{	
 	//	if (e->number == 1 || e->number == 2)
-                	set_pixel_img(e, point->x, point->y, RED);
+                	set_pixel_img(e, point->x, point->y, BLACK);
 	/*	if (e->number == 3)
 		{	
 			int	p;
@@ -86,6 +87,6 @@ void    calc_fractal(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
         else
 	{
 		if (e->number == 1 || e->number == 2)
-                	set_pixel_img(e, point->x, point->y, BLACK);	
+                	set_pixel_img(e, point->x, point->y, rgb(0, 0 ,e->ftl.i * 255/e->ftl.it_max));	
 	}
 }	
