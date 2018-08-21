@@ -20,6 +20,11 @@ void	check_fractal(int ac, char **av, t_env *e)
 	{
 		e->name = av[1];
 		get_number(e, av);
+		e->zoom.x1 = 0;
+        	e->zoom.x2 = 0;
+        	e->zoom.y1 = 0;
+       		e->zoom.y2 = 0;
+        	e->zoom.it = 0;
 	}
 	else 
 		arg_invalid(); 

@@ -9,7 +9,7 @@ void	err_malloc(void)
 
 void	arg_invalid(void)
 {
-	ft_putstr(C_GREEN"./fdf <julia> || <mendelbrot>\n"C_NONE);
+	ft_putstr(C_GREEN"./fdf <julia> || <mendelbrot> || <buddha>\n"C_NONE);
 	exit(1);
 }
 

@@ -11,7 +11,7 @@
 # include <sys/stat.h>
 
 /*
-**       Color text
+**       Colors text
 */
 
 # define C_NONE         "\033[0m"
@@ -26,7 +26,7 @@
 # define C_GRAY         "\033[37m"
 
 /*
-**       Color RGB
+**       Colors decimal
 */
 
 # define BLUE 43263
@@ -45,6 +45,10 @@
 # define WIN_L 500
 # define WIN_H 500
 
+/*
+**      Keys
+*/
+
 # define K_ESC 53
 # define K_COLOR 257
 # define K_CLIK 1
@@ -57,6 +61,13 @@ typedef struct		s_point
 	int		y;
 
 }			t_point;
+
+typedef struct		s_coord
+{
+	int	x;
+	int	y;
+
+}			t_coord;
 
 typedef struct           s_fractal
 {
@@ -91,7 +102,7 @@ typedef struct           s_fractal
 
 typedef struct  s_img
 {
-        void            *img;
+        void           		*img;
         int                     size_l;
         int                     bpp;
         int                     bppx;
@@ -112,6 +123,8 @@ typedef	struct		s_env
 	int		color1;
 	int		color2;
 	t_img		image;
+	t_coord		*coord;
+	t_zoom		zoom;
 }			t_env;
 
 /*
@@ -134,31 +147,22 @@ void	arg_invalid(void);
 void	image_err(void);
 
 /*
-**	mandelbrot.c
-*/
-
-void	init_mendel(t_env *e, t_fractal *fractal, t_point *point, t_img *image);
-void	calc_fractal(t_env *e, t_fractal *fractal, t_point *point, t_img *image);
-void    init_mendel_2(t_env *e, t_fractal *fractal, t_point *point, t_img *image);
-/*
-**      mandelbrot.c
-*/
-
-void	init_julia(t_env *e, t_fractal *fractal, t_point *point, t_img *image);
-void    init_julia_2(t_env *e, t_fractal *fractal, t_point *point, t_img *image);
-/*
 **	drawing.c
-*/
-void    draw_fractal(t_env *e);
-
-
-/*
-**      fractol.c
 */
 
 void	draw(t_env *e, t_fractal *ftl, t_point *point, t_img *image);
-void    init_mendel_2(t_env *e, t_fractal *ftl, t_point *point, t_img *image);
+void	calc_fractal(t_env *e, t_fractal *fractal, t_point *point, t_img *image);
+
+/*
+**      init_fractal.c
+*/
+void    init_mendel(t_env *e, t_fractal *fractal, t_point *point, t_img *image);
+void    init_mendel_2(t_env *e, t_fractal *fractal, t_point *point, t_img *image);
+void    init_julia(t_env *e, t_fractal *fractal, t_point *point, t_img *image);
+void    init_julia_2(t_env *e, t_fractal *fractal, t_point *point, t_img *image);
 void	init_buddhabrot(t_env *e, t_fractal *ftl, t_point *point, t_img *image);
+void    init_buddhabrot_2(t_env *e, t_fractal *ftl, t_point *point, t_img *image);
+
 /*
 **	hook.c
 */
@@ -167,15 +171,20 @@ int	key(int key, t_env *e);
 int	motion_notify(int x, int y, t_env *e);
 int	button_press(int key, int x, int y, t_env *e);
 int	destroy_notify(t_env *e);
+void	zoom(t_env *e, t_fractal *ftl, int x, int y);
 
 /*
 **	image.c
 */
-int long	rgb(int r, int g, int b);
-void	set_pxl_tab(t_fractal *ftl);
 void	set_pixel_img(t_env *e, int x, int y, int color);
 void	clear_img(t_env *e);
-void	get_color(t_env *e);
+
+/*
+**      tools.c
+*/
+
+int long	rgb(int r, int g, int b);
 void	change_color(t_env *e);
+void	get_color(t_env *e);
 
 #endif
