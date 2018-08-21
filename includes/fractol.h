@@ -124,7 +124,6 @@ typedef	struct		s_env
 	int		color2;
 	t_img		image;
 	t_coord		*coord;
-	t_zoom		zoom;
 }			t_env;
 
 /*

@@ -16,15 +16,11 @@ void	check_fractal(int ac, char **av, t_env *e)
 {
 	if (ac != 2)
 		arg_invalid();
-	if (ft_strcmp(av[1], "julia") == 0 || ft_strcmp(av[1], "mendelbrot") == 0 || ft_strcmp(av[1], "buddha") == 0)
+	if (ft_strcmp(av[1], "julia") == 0 || ft_strcmp(av[1], "mandelbrot") == 0
+	|| ft_strcmp(av[1], "buddha") == 0)
 	{
 		e->name = av[1];
 		get_number(e, av);
-		e->zoom.x1 = 0;
-        	e->zoom.x2 = 0;
-        	e->zoom.y1 = 0;
-       		e->zoom.y2 = 0;
-        	e->zoom.it = 0;
 	}
 	else 
 		arg_invalid(); 
@@ -32,7 +28,7 @@ void	check_fractal(int ac, char **av, t_env *e)
 
 void	get_number(t_env *e, char **av)
 {
-	if (ft_strcmp(av[1], "mendelbrot") == 0)
+	if (ft_strcmp(av[1], "mandelbrot") == 0)
 		e->number = 1;	
 	if (ft_strcmp(av[1], "julia") == 0)
 		e->number = 2;

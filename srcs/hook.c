@@ -30,7 +30,7 @@ int	destroy_notify(t_env *e)
 
 void	zoom(t_env *e, t_fractal *ftl,  int x, int y)
 {
-	int static	h;
+	int static	h = 30;
 
 	h -= 5;
 	e->point.x = 0;
@@ -39,7 +39,7 @@ void	zoom(t_env *e, t_fractal *ftl,  int x, int y)
 	ftl->x2 = x - h;
 	ftl->y1 = y + h;
 	ftl->y2 = y - h;
-	ftl->it_max = 100;;
+	ftl->it_max = 100;
 	ftl->img_x = 900;
         ftl->img_y = 700;
         ftl->zoom_x = ftl->img_x / (ftl->x2 - ftl->x1);

@@ -39,7 +39,8 @@ void    calc_fractal(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
 	if (e->number == 3)
 		init_buddhabrot_2(e, ftl, point, image);	
 	while (((pow(ftl->z_r, 2) + pow(ftl->z_i, 2)) < 4) && ftl->i < ftl->it_max)
-        {
+        {	
+		printf("ftl->i = %d \n", ftl->i);
                 ftl->tmp = ftl->z_r;
                 ftl->z_r = (pow(ftl->z_r, 2)) - (pow(ftl->z_i, 2)) + ftl->c_r;
                 ftl->z_i = 2 * ftl->z_i * ftl->tmp + ftl->c_i;
@@ -52,7 +53,10 @@ void    calc_fractal(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
 	}
 	printf("la\n");
         if (ftl->i == ftl->it_max && (e->number == 1 || e->number == 2))
-                set_pixel_img(e, point->x, point->y, BLACK);
+        {
+		set_pixel_img(e, point->x, point->y, BLACK);
+		printf("set pixel");
+	}
 	if (ftl->i != ftl->it_max && (e->number == 1 || e->number == 2))
                 set_pixel_img(e, point->x, point->y, rgb(0, 0 ,e->ftl.i * 255/e->ftl.it_max));
 	if (ftl->i != ftl->it_max && e->number == 3)
