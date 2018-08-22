@@ -4,14 +4,14 @@
 void    init_fractal(t_env *e)
 {
         if (e->number == 1)
-                init_mendel(e,&e->ftl, &e->point,  &e->image);
+                init_mendel(&e->ftl, &e->point);
         if (e->number == 2)
-                init_julia(e,&e->ftl, &e->point, &e->image);
+                init_julia(&e->ftl, &e->point);
 	if (e->number == 3)
-		init_buddhabrot(e, &e->ftl, &e->point, &e->image);
+		init_buddhabrot(&e->ftl, &e->point);
 }
 
-void    init_mendel(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
+void    init_mendel( t_fractal *ftl, t_point *point)
 {
 	point->x = 0;
 	point->y = 0;
@@ -26,7 +26,7 @@ void    init_mendel(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
 	ftl->it_max = 50;
 }
 
-void	init_mendel_2(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
+void	init_mendel_2(t_fractal *ftl, t_point *point)
 {
 	ftl->i = 0;
 	ftl->tmp = 0;
@@ -36,7 +36,7 @@ void	init_mendel_2(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
         ftl->z_i = 0;
 }
 
-void    init_julia(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
+void    init_julia(t_fractal *ftl, t_point *point)
 {
 	point->x = 0;
 	point->y = 0;
@@ -50,7 +50,7 @@ void    init_julia(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
 	ftl->zoom_y = ftl->img_y / (ftl->y2 - ftl->y1);
 }
 
-void    init_julia_2(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
+void    init_julia_2(t_fractal *ftl, t_point *point)
 {
 	ftl->i = 0;
 	ftl->tmp = 0;
@@ -61,7 +61,7 @@ void    init_julia_2(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
         ftl->it_max = 150;
 }
 
-void    init_buddhabrot(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
+void    init_buddhabrot(t_fractal *ftl, t_point *point)
 {
 	char 	**pxl_red;
 	char	**pxl_green;
@@ -83,7 +83,7 @@ void    init_buddhabrot(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
 	ftl->it_blue = 10000;
 }
 
-void    init_buddhabrot_2(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
+void    init_buddhabrot_2(t_fractal *ftl, t_point *point)
 {
         ftl->i = 0;
         ftl->tmp = 0;

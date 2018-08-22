@@ -155,12 +155,12 @@ void	calc_fractal(t_env *e, t_fractal *fractal, t_point *point, t_img *image);
 /*
 **      init_fractal.c
 */
-void    init_mendel(t_env *e, t_fractal *fractal, t_point *point, t_img *image);
-void    init_mendel_2(t_env *e, t_fractal *fractal, t_point *point, t_img *image);
-void    init_julia(t_env *e, t_fractal *fractal, t_point *point, t_img *image);
-void    init_julia_2(t_env *e, t_fractal *fractal, t_point *point, t_img *image);
-void	init_buddhabrot(t_env *e, t_fractal *ftl, t_point *point, t_img *image);
-void    init_buddhabrot_2(t_env *e, t_fractal *ftl, t_point *point, t_img *image);
+void    init_mendel(t_fractal *fractal, t_point *point);
+void    init_mendel_2(t_fractal *fractal, t_point *point);
+void    init_julia(t_fractal *fractal, t_point *point);
+void    init_julia_2(t_fractal *fractal, t_point *point);
+void	init_buddhabrot(t_fractal *ftl, t_point *point);
+void    init_buddhabrot_2(t_fractal *ftl, t_point *point);
 
 /*
 **	hook.c
