@@ -29,6 +29,7 @@ void	draw(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
 			point->y++;		
 		}
 	}
+	printf("DRAW\n");
 	mlx_put_image_to_window(e->mlx, e->win, image->img, 0, 0);
 }
 
