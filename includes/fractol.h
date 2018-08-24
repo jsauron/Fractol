@@ -8,7 +8,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <math.h>
-# include <sys/stat.h>
+# include <pthread.h>
 
 /*
 **       Colors text
