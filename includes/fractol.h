@@ -98,22 +98,11 @@ typedef struct           s_fractal
 	double		x2;
 	double		y1;
 	double		y2;
-	int		zoom;
-	int		color;
-	int		it_red;
-	int		it_green;
-	int		it_blue;
 	int		img_x;
 	int		img_y;
-	int		**pxl_red;
-	int		**pxl_green;
-	int		**pxl_blue;
-	int		***pxl_tmp;
-	int		it_max_red;
-	int		it_max_green;
-	int		it_max_blue;
 	int		zoom_x;
-	int		zoom_y;		
+	int		zoom_y;	
+	
 }                       t_fractal;
 
 typedef struct  s_img
@@ -126,6 +115,7 @@ typedef struct  s_img
         int                     x;
         int                     y;
         int                     *data;
+
 }                               t_img;
 
 typedef	struct		s_env
@@ -136,11 +126,10 @@ typedef	struct		s_env
 	t_fractal	ftl;
 	t_point		point;
 	int		number;
-	int		color1;
-	int		color2;
 	t_img		image;
 	t_coord		*coord;
 	t_matrice	m;
+
 }			t_env;
 
 /*
