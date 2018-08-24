@@ -9,6 +9,8 @@ int		key(int key, t_env *e)
 	if (key == MOVE_UP || key == MOVE_DOWN ||
 		key == MOVE_RIGHT || key == MOVE_LEFT)
 		key_move(e, key);
+	if (key == ROT_X || key == ROT_Y)
+		rot(e, e->ftl, key);
 	printf("%d\n", key);
 	return (0);
 }
@@ -29,6 +31,8 @@ int		button_press(int key, int x, int y, t_env *e)
 		zoom(e, &e->ftl, e->coord, 0.95);
 	if (key == ZOOM_LESS)
 		zoom(e, &e->ftl, e->coord, 1.05);
+	if (key == ROT_X || key == ROT_Y)
+		rot(e, e->ftl, key);
 	printf(" %d\n", key);
 	return (0);
 }
@@ -65,9 +69,9 @@ void	key_move(t_env *e, int key)
 		move(e, &e->ftl, 0, 0.1);
         if (key == MOVE_DOWN)
                 move(e, &e->ftl, 0, -0.1);
-        if (key == MOVE_RIGHT)
-                move(e, &e->ftl, 0.1, 0);
         if (key == MOVE_LEFT)
+                move(e, &e->ftl, 0.1, 0);
+        if (key == MOVE_RIGHT)
                 move(e, &e->ftl, -0.1, 0);
 }
 
@@ -81,4 +85,43 @@ void	move(t_env *e, t_fractal *ftl, float move_x, float move_y)
         ftl->zoom_y = ftl->img_y / (ftl->y2 - ftl->y1);
         clear_img(e);
         draw(e, ftl, &e->point, &e->image);
+}
+
+void	rot(t_env *e, t_fractal ftl, int key)
+{
+	double	tmp_x1;
+	double	tmp_x2;
+	double	tmp_y1;
+	double	tmp_y2;
+
+	if (key == ROT_X)
+	{
+		e->m.x_a = 1;
+		e->m.x_b = 0;
+		e->m.x_c = 0;
+		e->m.y_a = 0;
+		e->m.y_b = cos(BETA);
+		e->m.y_c = -sin(BETA);
+	}
+	if (key == ROT_Y)
+	{
+		e->m.x_a = cos(BETA);
+		e->m.x_b = 0;
+		e->m.x_c = sin(BETA);
+		e->m.y_a = 0;
+		e->m.y_b = 1;
+		e->m.y_c = 0;
+	}
+	tmp_x1 = (ftl.x1 * e->m.x_a) + (ftl.y1 * e->m.x_b);
+	tmp_y1 = (ftl.x1 * e->m.y_a) + (ftl.y1 * e->m.y_b);
+	tmp_x2 = (ftl.x2 * e->m.x_a) + (ftl.y2 * e->m.x_b);
+	tmp_y2 = (ftl.x2 * e->m.y_a) + (ftl.y2 * e->m.y_b);
+	ftl.x1 = tmp_x1;
+	ftl.x2 = tmp_x2; 
+	ftl.y1 = tmp_y1;
+	ftl.y2 = tmp_y2;
+	ftl.zoom_x = ftl.img_x / (ftl.x2 - ftl.x1);
+        ftl.zoom_y = ftl.img_y / (ftl.y2 - ftl.y1);
+        clear_img(e);
+        draw(e, &e->ftl, &e->point, &e->image);
 }

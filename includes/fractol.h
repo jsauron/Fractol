@@ -42,8 +42,7 @@
 **	Params
 */
 
-# define WIN_L 500
-# define WIN_H 500
+# define BETA 0.1
 
 /*
 **      Keys
@@ -58,6 +57,19 @@
 # define MOVE_DOWN 125
 # define MOVE_RIGHT 124
 # define MOVE_LEFT 123
+# define ROT_X 7
+# define ROT_Y 16
+
+typedef	struct		s_matrice
+{
+	double		x_a;
+	double		x_b;
+	double		x_c;
+	double		y_a;
+	double		y_b;
+	double		y_c;
+
+}			t_matrice;
 
 typedef struct		s_point
 {
@@ -128,6 +140,7 @@ typedef	struct		s_env
 	int		color2;
 	t_img		image;
 	t_coord		*coord;
+	t_matrice	m;
 }			t_env;
 
 /*
@@ -177,6 +190,7 @@ int	destroy_notify(t_env *e);
 void	zoom(t_env *e, t_fractal *ftl, t_coord *coord, float zoom);
 void	move(t_env *e, t_fractal *ftl, float move_x, float move_y);
 void	key_move(t_env *e, int key);
+void	rot(t_env *e, t_fractal ftl, int key);
 /*
 **	image.c
 */
