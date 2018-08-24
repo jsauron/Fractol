@@ -49,15 +49,15 @@
 **      Keys
 */
 
-# define K_ESC 53
-# define K_COLOR 257
-# define K_CLIK 1
-# define K_UP 5
-# define K_DOWN 4
-# define K_MOVE_UP 126
-# define K_MOVE_DN 125
-# define K_RT 124
-# define K_LT 123
+# define ESC 53
+# define COLOR 257
+# define CLIK 1
+# define ZOOM_PLUS 5
+# define ZOOM_LESS 4
+# define MOVE_UP 126
+# define MOVE_DOWN 125
+# define MOVE_RIGHT 124
+# define MOVE_LEFT 123
 
 typedef struct		s_point
 {
@@ -175,7 +175,8 @@ int	motion_notify(int x, int y, t_env *e);
 int	button_press(int key, int x, int y, t_env *e);
 int	destroy_notify(t_env *e);
 void	zoom(t_env *e, t_fractal *ftl, t_coord *coord, float zoom);
-
+void	move(t_env *e, t_fractal *ftl, float move_x, float move_y);
+void	key_move(t_env *e, int key);
 /*
 **	image.c
 */

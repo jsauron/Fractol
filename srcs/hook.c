@@ -2,10 +2,13 @@
 
 int		key(int key, t_env *e)
 {
-	if (key == K_ESC)
+	if (key == ESC)
 		exit_win(e);
-	if (key == K_COLOR)
+	if (key == COLOR)
 		change_color(e);
+	if (key == MOVE_UP || key == MOVE_DOWN ||
+		key == MOVE_RIGHT || key == MOVE_LEFT)
+		key_move(e, key);
 	printf("%d\n", key);
 	return (0);
 }
@@ -22,9 +25,9 @@ int		button_press(int key, int x, int y, t_env *e)
 {
 	e->coord->x = x;
 	e->coord->y = y;
-	if (key == K_CLIK || key == K_UP)
+	if (key == CLIK || key == ZOOM_PLUS)
 		zoom(e, &e->ftl, e->coord, 0.95);
-	if (key == K_DOWN)
+	if (key == ZOOM_LESS)
 		zoom(e, &e->ftl, e->coord, 1.05);
 	printf(" %d\n", key);
 	return (0);
@@ -49,35 +52,33 @@ void	zoom(t_env *e, t_fractal *ftl, t_coord *coord, float zoom)
 	ftl->x2 = tmp_x + (ftl->x2 - tmp_x) * zoom;
 	ftl->y1 = tmp_y - (tmp_y - ftl->y1) * zoom;
 	ftl->y2 = tmp_y + (ftl->y2 - tmp_y) * zoom;
-	ftl->it_max += 50;
+	ftl->it_max /= zoom;
         ftl->zoom_x = ftl->img_x / (ftl->x2 - ftl->x1);
         ftl->zoom_y = ftl->img_y / (ftl->y2 - ftl->y1);
 	clear_img(e);
 	draw(e, ftl, &e->point, &e->image);	
 }
 
-void	dezoom(t_env *e, t_fractal *ftl, int x, int y)
+void	key_move(t_env *e, int key)
 {
-        double          tmp_x;
-        double          tmp_y;
-
-        e->point.x = 0;
-        e->point.y = 0;
-
-        tmp_x = (((ftl->x2 - ftl->x1) * (double)x / ftl->img_x) + ftl->x1);
-        tmp_y = (((ftl->y2 - ftl->y1) * (double)y / ftl->img_y) + ftl->y1);
-        ftl->x1 = tmp_x - (ftl->x2 - ftl->x1) * 2;
-        ftl->x2 = tmp_x + (ftl->x2 - tmp_x) * 2;
-        ftl->y1 = tmp_y - (ftl->y2 - ftl->y1) * 2;
-        ftl->y2 = tmp_y + (ftl->y2 - tmp_y) * 2;
-        ftl->it_max -= 50;
-        ftl->zoom_x = (ftl->img_x / (ftl->x2 - ftl->x1)) / 2;
-        ftl->zoom_y = (ftl->img_y / (ftl->y2 - ftl->y1)) / 2;
-        clear_img(e);
-	draw(e, ftl, &e->point, &e->image);	
+	if (key == MOVE_UP)
+		move(e, &e->ftl, 0, 0.1);
+        if (key == MOVE_DOWN)
+                move(e, &e->ftl, 0, -0.1);
+        if (key == MOVE_RIGHT)
+                move(e, &e->ftl, 0.1, 0);
+        if (key == MOVE_LEFT)
+                move(e, &e->ftl, -0.1, 0);
 }
 
-//void	move(t_fractal *ftl, int key)
-//{
-	
-//}
+void	move(t_env *e, t_fractal *ftl, float move_x, float move_y)
+{
+        ftl->x1 += move_x;
+        ftl->x2 += move_x;
+        ftl->y1 += move_y;
+        ftl->y2 += move_y;
+        ftl->zoom_x = ftl->img_x / (ftl->x2 - ftl->x1);
+        ftl->zoom_y = ftl->img_y / (ftl->y2 - ftl->y1);
+        clear_img(e);
+        draw(e, ftl, &e->point, &e->image);
+}
