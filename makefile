@@ -39,8 +39,8 @@ $(NAME):$(OBJS)
 lib:
 	@make -j -C libft/ libft.a
 
-%.o: %.c $(INCLUDES) fractol.h
-	@gcc -fsanitize=adrdress -Wall -Wextra -Werror -o $@ -c $<
+%.o: %.c $(INCLUDES)fractol.h
+	@gcc -fsanitize=address -Wall -Wextra -Werror -o $@ -c $<
 
 clean:
 	@rm -f $(OBJS) && make -C libft/ clean

@@ -54,6 +54,10 @@
 # define K_CLIK 1
 # define K_UP 5
 # define K_DOWN 4
+# define K_MOVE_UP 126
+# define K_MOVE_DN 125
+# define K_RT 124
+# define K_LT 123
 
 typedef struct		s_point
 {
@@ -150,7 +154,7 @@ void	image_err(void);
 */
 
 void	draw(t_env *e, t_fractal *ftl, t_point *point, t_img *image);
-void	calc_fractal(t_env *e, t_fractal *fractal, t_point *point, t_img *image);
+void	calc_fractal(t_env *e, t_fractal *fractal, t_point *point);
 
 /*
 **      init_fractal.c
@@ -170,8 +174,7 @@ int	key(int key, t_env *e);
 int	motion_notify(int x, int y, t_env *e);
 int	button_press(int key, int x, int y, t_env *e);
 int	destroy_notify(t_env *e);
-void	zoom(t_env *e, t_fractal *ftl, int x, int y);
-void    dezoom(t_env *e, t_fractal *ftl, int x, int y);
+void	zoom(t_env *e, t_fractal *ftl, t_coord *coord, float zoom);
 
 /*
 **	image.c

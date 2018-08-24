@@ -9,7 +9,7 @@ void	draw(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
                 point->x = 0;
                 while (point->x < ftl->img_x)
                 {				
-                        calc_fractal(e, ftl, point, image);
+                        calc_fractal(e, ftl, point);
                         point->x++;
                 }
                 point->y++;
@@ -33,7 +33,7 @@ void	draw(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
 	mlx_put_image_to_window(e->mlx, e->win, image->img, 0, 0);
 }
 
-void    calc_fractal(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
+void    calc_fractal(t_env *e, t_fractal *ftl, t_point *point)
 {
 	t_coord		coord[ftl->it_max];
 
@@ -59,7 +59,7 @@ void    calc_fractal(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
         if (ftl->i == ftl->it_max && (e->number == 1 || e->number == 2))
 		set_pixel_img(e, point->x, point->y, BLACK);
 	if (ftl->i != ftl->it_max && (e->number == 1 || e->number == 2))
-                set_pixel_img(e, point->x, point->y, rgb(0, 0 ,e->ftl.i * 255/e->ftl.it_max));
+                set_pixel_img(e, point->x, point->y, rgb(0, 0 ,e->ftl.i * 255/50));
 	if (ftl->i != ftl->it_max && e->number == 3)
 	{
 		while (ftl->i > 0)

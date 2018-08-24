@@ -20,10 +20,12 @@ int		motion_notify(int x, int y, t_env *e)
 
 int		button_press(int key, int x, int y, t_env *e)
 {
+	e->coord->x = x;
+	e->coord->y = y;
 	if (key == K_CLIK || key == K_UP)
-		zoom(e, &e->ftl, x, y);
+		zoom(e, &e->ftl, e->coord, 0.95);
 	if (key == K_DOWN)
-		dezoom(e, &e->ftl,x ,y);	
+		zoom(e, &e->ftl, e->coord, 1.05);
 	printf(" %d\n", key);
 	return (0);
 }
@@ -34,24 +36,19 @@ int	destroy_notify(t_env *e)
 	return (0);
 }
 
-void	zoom(t_env *e, t_fractal *ftl,  int x, int y)
+void	zoom(t_env *e, t_fractal *ftl, t_coord *coord, float zoom)
 {
-	double		hx;
-	double		hy;
 	double		tmp_x;
 	double		tmp_y;
 
 	e->point.x = 0;
         e->point.y = 0;
-	//hx = ((ftl->x2 - 0.3) > ftl->x1) ?  ftl->x2 - 0.3 : ftl->x2 - 0.3 / 10;
-	//hy = ((ftl->y2 - 0.3) > ftl->y1) ? ftl->y2 - 0.3 : ftl->y2 - 0.3 / 10;
-	
-	tmp_x = (((ftl->x2 - ftl->x1) * (double)x / ftl->img_x) + ftl->x1);
-	tmp_y = (((ftl->y2 - ftl->y1) * (double)y / ftl->img_y) + ftl->y1);
-	ftl->x1 = tmp_x - (ftl->x2 - ftl->x1)/4;
-	ftl->x2 = tmp_x + (ftl->x2 - tmp_x)/4;
-	ftl->y1 = tmp_y - (ftl->y2 - ftl->y1) /4;
-	ftl->y2 = tmp_y + (ftl->y2 - tmp_y) / 4;
+	tmp_x = (((ftl->x2 - ftl->x1) * (double)coord->x / ftl->img_x) + ftl->x1);
+	tmp_y = (((ftl->y2 - ftl->y1) * (double)coord->y / ftl->img_y) + ftl->y1);	
+	ftl->x1 = tmp_x - (tmp_x - ftl->x1) * zoom;
+	ftl->x2 = tmp_x + (ftl->x2 - tmp_x) * zoom;
+	ftl->y1 = tmp_y - (tmp_y - ftl->y1) * zoom;
+	ftl->y2 = tmp_y + (ftl->y2 - tmp_y) * zoom;
 	ftl->it_max += 50;
         ftl->zoom_x = ftl->img_x / (ftl->x2 - ftl->x1);
         ftl->zoom_y = ftl->img_y / (ftl->y2 - ftl->y1);
@@ -61,8 +58,6 @@ void	zoom(t_env *e, t_fractal *ftl,  int x, int y)
 
 void	dezoom(t_env *e, t_fractal *ftl, int x, int y)
 {
-	double          hx;
-        double          hy;
         double          tmp_x;
         double          tmp_y;
 
@@ -79,4 +74,10 @@ void	dezoom(t_env *e, t_fractal *ftl, int x, int y)
         ftl->zoom_x = (ftl->img_x / (ftl->x2 - ftl->x1)) / 2;
         ftl->zoom_y = (ftl->img_y / (ftl->y2 - ftl->y1)) / 2;
         clear_img(e);
+	draw(e, ftl, &e->point, &e->image);	
 }
+
+//void	move(t_fractal *ftl, int key)
+//{
+	
+//}

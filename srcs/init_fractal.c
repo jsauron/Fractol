@@ -63,9 +63,6 @@ void    init_julia_2(t_fractal *ftl, t_point *point)
 
 void    init_buddhabrot(t_fractal *ftl, t_point *point)
 {
-	char 	**pxl_red;
-	char	**pxl_green;
-	char	**pxl_blue;
 
         point->x = 0;
         point->y = 0;
