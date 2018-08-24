@@ -17,11 +17,9 @@ int		main(int ac, char **av)
 	t_env	e;
 
 	check_fractal(ac, av, &e);
-	get_color(&e);
 	init_fractal(&e);
 	init_win(&e);
 	init_img(&e);
-//	clear_img(&e);
 	draw(&e, &e.ftl, &e.point, &e.image);
 	mlx_hook(e.win, 2, 0, key, &e);
 	mlx_hook(e.win, 6, 0, motion_notify, &e);

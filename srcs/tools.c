@@ -9,7 +9,7 @@ int long	rgb(int r, int g, int b)
 	return (c);
 }
 
-void	change_color(t_env *e)
+/*void	change_color(t_env *e)
 {
 	get_color(e);
 	clear_img(e);
@@ -43,4 +43,4 @@ void	get_color(t_env *e)
 		e->color2 = e->ftl.i * RED;
 	}
 	c++;					
-}
+}*/

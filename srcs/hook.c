@@ -4,8 +4,8 @@ int		key(int key, t_env *e)
 {
 	if (key == ESC)
 		exit_win(e);
-	if (key == COLOR)
-		change_color(e);
+/*	if (key == COLOR)
+		change_color(e); */
 	if (key == MOVE_UP || key == MOVE_DOWN ||
 		key == MOVE_RIGHT || key == MOVE_LEFT)
 		key_move(e, key);

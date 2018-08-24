@@ -75,9 +75,6 @@ void    init_buddhabrot(t_fractal *ftl, t_point *point)
 	ftl->zoom_x = ftl->img_x / (ftl->x2 - ftl->x1);
 	ftl->zoom_y = ftl->img_y / (ftl->y2 - ftl->y1);	
 	ftl->it_max = 100;
-	ftl->it_red = 100;
-	ftl->it_green = 1000;
-	ftl->it_blue = 10000;
 }
 
 void    init_buddhabrot_2(t_fractal *ftl, t_point *point)
