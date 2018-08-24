@@ -14,6 +14,5 @@ void	set_pixel_img(t_env *e, int x, int y, int color)
 
 void	clear_img(t_env *e)
 {
-	printf("sss");
 	ft_bzero(e->image.data, e->ftl.img_x * e->ftl.img_y * 4);
 }

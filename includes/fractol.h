@@ -171,6 +171,7 @@ int	motion_notify(int x, int y, t_env *e);
 int	button_press(int key, int x, int y, t_env *e);
 int	destroy_notify(t_env *e);
 void	zoom(t_env *e, t_fractal *ftl, int x, int y);
+void    dezoom(t_env *e, t_fractal *ftl, int x, int y);
 
 /*
 **	image.c
