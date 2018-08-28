@@ -1,20 +1,41 @@
 
 #include "../includes/fractol.h"
 
+void	init_point(t_env *e, t_fractal *ftl)
+{
+	int x;
+	int y;
+
+	if (!(e->line = (t_line *)malloc(sizeof(t_line) * ftl->img_y)))
+		err_malloc();
+	y = 0;
+	while (y < ftl->img_y)
+	{
+		x = 0;
+		if (!(e->line[y].point = (t_point *)malloc(sizeof(t_point) * ftl->img_x)))
+			err_malloc();
+		while (x < ftl->img_x)
+		{
+			e->line[y].point[x].x = x;
+			e->line[y].point[x].y = y;
+			x++;
+		}
+		y++;
+	}
+}
+
 void    init_fractal(t_env *e)
 {
         if (e->number == 1)
-                init_mendel(&e->ftl, &e->point);
+                init_mendel(&e->ftl);
         if (e->number == 2)
-                init_julia(&e->ftl, &e->point);
+                init_julia(&e->ftl);
 	if (e->number == 3)
-		init_buddhabrot(&e->ftl, &e->point);
+		init_buddhabrot(&e->ftl);
 }
 
-void    init_mendel( t_fractal *ftl, t_point *point)
+void    init_mendel( t_fractal *ftl)
 {
-	point->x = 0;
-	point->y = 0;
         ftl->x1 = -2.1;
         ftl->x2 = 0.6;
         ftl->y1 = -1.2;
@@ -26,20 +47,18 @@ void    init_mendel( t_fractal *ftl, t_point *point)
 	ftl->it_max = 50;
 }
 
-void	init_mendel_2(t_fractal *ftl, t_point *point)
+void	init_mendel_2(t_fractal *ftl, t_point p)
 {
 	ftl->i = 0;
 	ftl->tmp = 0;
-        ftl->c_r = (float)point->x / ftl->zoom_x + ftl->x1;
-        ftl->c_i = (float)point->y / ftl->zoom_y + ftl->y1;
+        ftl->c_r = (float)p.x / ftl->zoom_x + ftl->x1;
+        ftl->c_i = (float)p.y / ftl->zoom_y + ftl->y1;
         ftl->z_r = 0;
         ftl->z_i = 0;
 }
 
-void    init_julia(t_fractal *ftl, t_point *point)
+void    init_julia(t_fractal *ftl)
 {
-	point->x = 0;
-	point->y = 0;
         ftl->x1 = -1;
         ftl->x2 = 1;
         ftl->y1 = -1.2;
@@ -50,22 +69,20 @@ void    init_julia(t_fractal *ftl, t_point *point)
 	ftl->zoom_y = ftl->img_y / (ftl->y2 - ftl->y1);
 }
 
-void    init_julia_2(t_fractal *ftl, t_point *point)
+void    init_julia_2(t_fractal *ftl, t_point p)
 {
 	ftl->i = 0;
 	ftl->tmp = 0;
-        ftl->z_r = (float)point->x / ftl->zoom_x + ftl->x1;
-        ftl->z_i = (float)point->y / ftl->zoom_y + ftl->y1;
+        ftl->z_r = (float)p.x / ftl->zoom_x + ftl->x1;
+        ftl->z_i = (float)p.y / ftl->zoom_y + ftl->y1;
         ftl->c_r = 0.285;
         ftl->c_i = 0.01;
         ftl->it_max = 150;
 }
 
-void    init_buddhabrot(t_fractal *ftl, t_point *point)
+void    init_buddhabrot(t_fractal *ftl)
 {
 
-        point->x = 0;
-        point->y = 0;
         ftl->x1 = -2.1;
         ftl->x2 = 0.6;
         ftl->y1 = -1.2;
@@ -77,12 +94,12 @@ void    init_buddhabrot(t_fractal *ftl, t_point *point)
 	ftl->it_max = 100;
 }
 
-void    init_buddhabrot_2(t_fractal *ftl, t_point *point)
+void    init_buddhabrot_2(t_fractal *ftl, t_point p)
 {
         ftl->i = 0;
         ftl->tmp = 0;
-        ftl->c_r = (float)point->x / ftl->zoom_x + ftl->x1;
-        ftl->c_i = (float)point->y / ftl->zoom_y + ftl->y1;
+        ftl->c_r = (float)p.x / ftl->zoom_x + ftl->x1;
+        ftl->c_i = (float)p.y / ftl->zoom_y + ftl->y1;
         ftl->z_r = 0;
         ftl->z_i = 0;
 }

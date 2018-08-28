@@ -4,13 +4,13 @@ int		key(int key, t_env *e)
 {
 	if (key == ESC)
 		exit_win(e);
-/*	if (key == COLOR)
-		change_color(e); */
+	if (key == CHANGE_F)
+		change_fractal(e);
 	if (key == MOVE_UP || key == MOVE_DOWN ||
 		key == MOVE_RIGHT || key == MOVE_LEFT)
 		key_move(e, key);
-	if (key == ROT_X || key == ROT_Y)
-		rot(e, e->ftl, key);
+	if (key == ROT_X || key == ROT_Y || key == ROT_Z)
+		rot(e, key);
 	printf("%d\n", key);
 	return (0);
 }
@@ -30,9 +30,9 @@ int		button_press(int key, int x, int y, t_env *e)
 	if (key == CLIK || key == ZOOM_PLUS)
 		zoom(e, &e->ftl, e->coord, 0.95);
 	if (key == ZOOM_LESS)
-		zoom(e, &e->ftl, e->coord, 1.05);
+		zoom(e, &e->ftl,  e->coord, 1.05);
 	if (key == ROT_X || key == ROT_Y)
-		rot(e, e->ftl, key);
+		rot(e, key);
 	printf(" %d\n", key);
 	return (0);
 }
@@ -48,8 +48,6 @@ void	zoom(t_env *e, t_fractal *ftl, t_coord *coord, float zoom)
 	double		tmp_x;
 	double		tmp_y;
 
-	e->point.x = 0;
-        e->point.y = 0;
 	tmp_x = (((ftl->x2 - ftl->x1) * (double)coord->x / ftl->img_x) + ftl->x1);
 	tmp_y = (((ftl->y2 - ftl->y1) * (double)coord->y / ftl->img_y) + ftl->y1);	
 	ftl->x1 = tmp_x - (tmp_x - ftl->x1) * zoom;
@@ -60,7 +58,7 @@ void	zoom(t_env *e, t_fractal *ftl, t_coord *coord, float zoom)
         ftl->zoom_x = ftl->img_x / (ftl->x2 - ftl->x1);
         ftl->zoom_y = ftl->img_y / (ftl->y2 - ftl->y1);
 	clear_img(e);
-	draw(e, ftl, &e->point, &e->image);	
+	draw(e, ftl, &e->image);	
 }
 
 void	key_move(t_env *e, int key)
@@ -84,44 +82,29 @@ void	move(t_env *e, t_fractal *ftl, float move_x, float move_y)
         ftl->zoom_x = ftl->img_x / (ftl->x2 - ftl->x1);
         ftl->zoom_y = ftl->img_y / (ftl->y2 - ftl->y1);
         clear_img(e);
-        draw(e, ftl, &e->point, &e->image);
+        draw(e, ftl,  &e->image);
 }
 
-void	rot(t_env *e, t_fractal ftl, int key)
+void	change_fractal(t_env *e)
 {
-	double	tmp_x1;
-	double	tmp_x2;
-	double	tmp_y1;
-	double	tmp_y2;
+	if (e->number == 3)
+		e->number = 0;
+	e->number++;
+	mlx_destroy_window(e->mlx, e->win);
+	mlx_destroy_image(e->mlx, e->image.img);
+	init_fractal(e);
+	init_win(e);
+	init_img(e);
+	init_point(e, &e->ftl);
+	draw(e, &e->ftl,  &e->image);	
+}
 
+void	rot(t_env *e, int key)
+{
 	if (key == ROT_X)
-	{
-		e->m.x_a = 1;
-		e->m.x_b = 0;
-		e->m.x_c = 0;
-		e->m.y_a = 0;
-		e->m.y_b = cos(BETA);
-		e->m.y_c = -sin(BETA);
-	}
-	if (key == ROT_Y)
-	{
-		e->m.x_a = cos(BETA);
-		e->m.x_b = 0;
-		e->m.x_c = sin(BETA);
-		e->m.y_a = 0;
-		e->m.y_b = 1;
-		e->m.y_c = 0;
-	}
-	tmp_x1 = (ftl.x1 * e->m.x_a) + (ftl.y1 * e->m.x_b);
-	tmp_y1 = (ftl.x1 * e->m.y_a) + (ftl.y1 * e->m.y_b);
-	tmp_x2 = (ftl.x2 * e->m.x_a) + (ftl.y2 * e->m.x_b);
-	tmp_y2 = (ftl.x2 * e->m.y_a) + (ftl.y2 * e->m.y_b);
-	ftl.x1 = tmp_x1;
-	ftl.x2 = tmp_x2; 
-	ftl.y1 = tmp_y1;
-	ftl.y2 = tmp_y2;
-	ftl.zoom_x = ftl.img_x / (ftl.x2 - ftl.x1);
-        ftl.zoom_y = ftl.img_y / (ftl.y2 - ftl.y1);
-        clear_img(e);
-        draw(e, &e->ftl, &e->point, &e->image);
+		rot_x(e);
+	else if (key == ROT_Y)
+		rot_y(e);
+	else if (key == ROT_Z)
+		rot_z(e);
 }

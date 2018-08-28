@@ -59,6 +59,9 @@
 # define MOVE_LEFT 123
 # define ROT_X 7
 # define ROT_Y 16
+# define ROT_Z 13
+# define CHANGE_F 36
+
 
 typedef	struct		s_matrice
 {
@@ -68,6 +71,9 @@ typedef	struct		s_matrice
 	double		y_a;
 	double		y_b;
 	double		y_c;
+        double          z_a;
+        double          z_b;
+        double          z_c;
 
 }			t_matrice;
 
@@ -75,8 +81,15 @@ typedef struct		s_point
 {
 	int		x;
 	int		y;
+	double		z;
 
 }			t_point;
+
+typedef struct		s_line
+{
+	t_point		*point;
+
+}			t_line;
 
 typedef struct		s_coord
 {
@@ -102,7 +115,8 @@ typedef struct           s_fractal
 	int		img_y;
 	int		zoom_x;
 	int		zoom_y;	
-	
+	int		center_x;
+	int		center_y;	
 }                       t_fractal;
 
 typedef struct  s_img
@@ -124,11 +138,11 @@ typedef	struct		s_env
 	void		*win;
 	char		*name;
 	t_fractal	ftl;
-	t_point		point;
 	int		number;
 	t_img		image;
 	t_coord		*coord;
 	t_matrice	m;
+	t_line		*line;
 
 }			t_env;
 
@@ -142,6 +156,7 @@ void	init_fractal(t_env *e);
 void	init_win(t_env *e);
 void	init_img(t_env *e);
 void	exit_win(t_env *e);
+void	init_matrice(t_env *e);
 
 /*
 **	error.c
@@ -155,18 +170,20 @@ void	image_err(void);
 **	drawing.c
 */
 
-void	draw(t_env *e, t_fractal *ftl, t_point *point, t_img *image);
-void	calc_fractal(t_env *e, t_fractal *fractal, t_point *point);
+void	draw(t_env *e, t_fractal *ftl,  t_img *image);
+void	calc_fractal(t_env *e, t_fractal *fractal, t_point *p);
 
 /*
 **      init_fractal.c
 */
-void    init_mendel(t_fractal *fractal, t_point *point);
-void    init_mendel_2(t_fractal *fractal, t_point *point);
-void    init_julia(t_fractal *fractal, t_point *point);
-void    init_julia_2(t_fractal *fractal, t_point *point);
-void	init_buddhabrot(t_fractal *ftl, t_point *point);
-void    init_buddhabrot_2(t_fractal *ftl, t_point *point);
+
+void	init_point(t_env *e, t_fractal *ftl);
+void    init_mendel(t_fractal *ftl);
+void    init_mendel_2(t_fractal *ftl, t_point p);
+void    init_julia(t_fractal *ftl);
+void    init_julia_2(t_fractal *ftl, t_point p);
+void	init_buddhabrot(t_fractal *ftl);
+void    init_buddhabrot_2(t_fractal *ftl, t_point p);
 
 /*
 **	hook.c
@@ -179,7 +196,9 @@ int	destroy_notify(t_env *e);
 void	zoom(t_env *e, t_fractal *ftl, t_coord *coord, float zoom);
 void	move(t_env *e, t_fractal *ftl, float move_x, float move_y);
 void	key_move(t_env *e, int key);
-void	rot(t_env *e, t_fractal ftl, int key);
+void	change_fractal(t_env *e);
+void	rot(t_env *e, int key);
+
 /*
 **	image.c
 */
@@ -191,7 +210,18 @@ void	clear_img(t_env *e);
 */
 
 int long	rgb(int r, int g, int b);
+void		get_center(t_env *e);
 void	change_color(t_env *e);
 void	get_color(t_env *e);
+
+/*
+**      matrice.c
+*/
+
+void    calc_all_points(t_env *e,t_fractal *ftl);
+void    calc_matrice(/*t_env *e,*/ t_matrice *m, t_point *p);
+void    rot_x(t_env *e);
+void    rot_y(t_env *e);
+void    rot_z(t_env *e);
 
 #endif

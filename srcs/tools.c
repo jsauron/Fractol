@@ -9,6 +9,12 @@ int long	rgb(int r, int g, int b)
 	return (c);
 }
 
+void	get_center(t_env *e)
+{
+	e->ftl.center_x = (e->ftl.x2 - e->ftl.x1) / 2;
+	e->ftl.center_y = (e->ftl.y2 - e->ftl.y1) / 2;
+}
+
 /*void	change_color(t_env *e)
 {
 	get_color(e);

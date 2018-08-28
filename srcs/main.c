@@ -20,7 +20,8 @@ int		main(int ac, char **av)
 	init_fractal(&e);
 	init_win(&e);
 	init_img(&e);
-	draw(&e, &e.ftl, &e.point, &e.image);
+	init_point(&e, &e.ftl);
+	draw(&e, &e.ftl, &e.image);
 	mlx_hook(e.win, 2, 0, key, &e);
 	mlx_hook(e.win, 6, 0, motion_notify, &e);
 	mlx_hook(e.win, 4, 1L<<2 , button_press, &e);

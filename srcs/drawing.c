@@ -1,49 +1,44 @@
 
 #include "../includes/fractol.h"
 
-void	draw(t_env *e, t_fractal *ftl, t_point *point, t_img *image)
-{	
-	point->y = 0;
-        while (point->y < ftl->img_y)
-        {
-                point->x = 0;
-                while (point->x < ftl->img_x)
-                {				
-                        calc_fractal(e, ftl, point);
-                        point->x++;
-                }
-                point->y++;
-        }
+void	draw(t_env *e, t_fractal *ftl, t_img *image)
+{
+	int		x;
+	int 		y;
+	t_point		p;
+
+	calc_all_points(e, ftl);	
 	if (e->number == 3)
 	{
-		point->y = 0;
-		while (point->y < ftl->img_y)
+		y = 0;
+		while (y < ftl->img_y)
 		{
-			point->x = 0;
-			while (point->x < ftl->img_x)
-			{
-                                set_pixel_img(e, point->x, point->y,
-                                rgb(0, 0 , image->data[point->x + point->y * ftl->img_x] * 255 /15));
-				point->x++;
+			x = 0;
+			while (x < ftl->img_x)
+			{	
+				p = e->line[y].point[x];
+                                set_pixel_img(e, p.x, p.y,
+                                rgb(0, 0 , image->data[p.x + p.y * ftl->img_x] * 255 /15));
+				x++;
 			}
-			point->y++;		
+			y++;		
 		}
 	}
 	printf("DRAW\n");
 	mlx_put_image_to_window(e->mlx, e->win, image->img, 0, 0);
 }
 
-void    calc_fractal(t_env *e, t_fractal *ftl, t_point *point)
+void    calc_fractal(t_env *e, t_fractal *ftl, t_point *p)
 {
 	t_coord		coord[ftl->it_max];
 
 	e->coord = coord;
 	if (e->number == 1)
-                init_mendel_2(ftl, point);
+                init_mendel_2(ftl, *p);
         if (e->number == 2)
-                init_julia_2(ftl, point);
+                init_julia_2(ftl, *p);
 	if (e->number == 3)
-		init_buddhabrot_2(ftl, point);	
+		init_buddhabrot_2(ftl, *p);	
 	while (((pow(ftl->z_r, 2) + pow(ftl->z_i, 2)) < 4) && ftl->i < ftl->it_max)
         {	
                 ftl->tmp = ftl->z_r;
@@ -57,9 +52,15 @@ void    calc_fractal(t_env *e, t_fractal *ftl, t_point *point)
 		ftl->i++;
 	}
         if (ftl->i == ftl->it_max && (e->number == 1 || e->number == 2))
-		set_pixel_img(e, point->x, point->y, BLACK);
+	{
+		set_pixel_img(e, p->x, p->y, BLACK);
+		p->z = BLACK;
+	}
 	if (ftl->i != ftl->it_max && (e->number == 1 || e->number == 2))
-                set_pixel_img(e, point->x, point->y, rgb(0, 0 ,e->ftl.i * 255/50));
+        {
+	       set_pixel_img(e, p->x, p->y, rgb(0, 0 ,e->ftl.i * 255 / 50));
+		p->z = e->ftl.i * 255 / 50;
+	}
 	if (ftl->i != ftl->it_max && e->number == 3)
 	{
 		while (ftl->i > 0)

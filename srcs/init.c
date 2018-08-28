@@ -21,9 +21,23 @@ void	check_fractal(int ac, char **av, t_env *e)
 	{
 		e->name = av[1];
 		get_number(e, av);
+		init_matrice(e);
 	}
 	else 
 		arg_invalid(); 
+}
+
+void	init_matrice(t_env *e)
+{
+	e->m.x_a = 1;
+        e->m.x_b = 0;
+        e->m.x_c = 0;
+        e->m.y_a = 0;
+        e->m.y_b = 1;
+        e->m.y_c = 0;
+        e->m.z_a = 0;
+        e->m.z_b = 0;
+        e->m.z_c = 1;
 }
 
 void	get_number(t_env *e, char **av)
