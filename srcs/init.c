@@ -27,6 +27,13 @@ void	check_fractal(int ac, char **av, t_env *e)
 		arg_invalid(); 
 }
 
+void	init(t_env *e)
+{
+	init_fractal(e);
+        init_win(e);
+        init_img(e);
+        init_point(e, &e->ftl);
+}
 void	init_matrice(t_env *e)
 {
 	e->m.x_a = 1;

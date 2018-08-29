@@ -14,8 +14,6 @@ void	calc_all_points(t_env *e, t_fractal *ftl)
 		{
 			p = &e->line[y].point[x];
 //			calc_matrice(/*e,*/ &e->m, p);
-			//p->x -= e->center_x;
-			//p->y -= e->center_y;
 			calc_fractal(e, ftl, p, x, y);
 			x++;
 		}
