@@ -13,28 +13,30 @@ void	calc_all_points(t_env *e, t_fractal *ftl)
 		while (x < ftl->img_x)
 		{
 			p = &e->line[y].point[x];
-			calc_matrice(/*e,*/ &e->m, p);
-			calc_fractal(e, ftl, p);
+//			calc_matrice(/*e,*/ &e->m, p);
 			//p->x -= e->center_x;
 			//p->y -= e->center_y;
+			calc_fractal(e, ftl, p, x, y);
 			x++;
 		}
 		y++;
 	}
 }
 
-void		calc_matrice(/*t_env *e,*/ t_matrice *m, t_point *p)
+void		calc_matrice(t_env *e, t_matrice *m, t_point *p)
 {
 	double	new_x;
 	double	new_y;
 	double	new_z;
 	
+	p->x -= e->center_x;
+	p->y -= e->center_y;	
 	printf("p.x = %d\n" , p->x);
 	new_x = (p->x * m->x_a) + (p->y * m->x_b) + (p->z * m->x_c) ;
 	new_y = (p->x * m->y_a) + (p->y * m->y_b) + (p->z * m->y_c) ;
 	new_z = (p->x * m->z_a) + (p->y * m->z_b) + (p->z * m->z_c) ;
-	p->x = new_x /*+ e->center.x*/;
-	p->y = new_y /*+ e->center.y*/;
+	p->x = new_x + e->center_x;
+	p->y = new_y + e->center_y;
 	p->z = new_z;
 	 printf("p.x2 = %d\n" , p->x);
 }

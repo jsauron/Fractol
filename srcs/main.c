@@ -21,8 +21,9 @@ int		main(int ac, char **av)
 	init_win(&e);
 	init_img(&e);
 	init_point(&e, &e.ftl);
+	get_center(&e);
 	draw(&e, &e.ftl, &e.image);
-	mlx_hook(e.win, 2, 0, key, &e);
+	mlx_hook(e.win, 2, 1, key, &e);
 	mlx_hook(e.win, 6, 0, motion_notify, &e);
 	mlx_hook(e.win, 4, 1L<<2 , button_press, &e);
 	mlx_hook(e.win, 17, 0, destroy_notify, &e);

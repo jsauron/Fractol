@@ -13,6 +13,7 @@ void	get_center(t_env *e)
 {
 	e->ftl.center_x = (e->ftl.x2 - e->ftl.x1) / 2;
 	e->ftl.center_y = (e->ftl.y2 - e->ftl.y1) / 2;
+	printf("center x = %d\n", e->ftl.center_x);
 }
 
 /*void	change_color(t_env *e)

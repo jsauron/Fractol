@@ -28,7 +28,7 @@ void	draw(t_env *e, t_fractal *ftl, t_img *image)
 	mlx_put_image_to_window(e->mlx, e->win, image->img, 0, 0);
 }
 
-void    calc_fractal(t_env *e, t_fractal *ftl, t_point *p)
+void    calc_fractal(t_env *e, t_fractal *ftl, t_point *p, int x, int y)
 {
 	t_coord		coord[ftl->it_max];
 
@@ -51,14 +51,15 @@ void    calc_fractal(t_env *e, t_fractal *ftl, t_point *p)
         	}
 		ftl->i++;
 	}
+	calc_matrice(e,&e->m, p);
         if (ftl->i == ftl->it_max && (e->number == 1 || e->number == 2))
 	{
-		set_pixel_img(e, p->x, p->y, BLACK);
+		set_pixel_img(e, x, y, BLACK);
 		p->z = BLACK;
 	}
 	if (ftl->i != ftl->it_max && (e->number == 1 || e->number == 2))
         {
-	       set_pixel_img(e, p->x, p->y, rgb(0, 0 ,e->ftl.i * 255 / 50));
+	       set_pixel_img(e, x, y, rgb(0, 0 ,e->ftl.i * 255 / 50));
 		p->z = e->ftl.i * 255 / 50;
 	}
 	if (ftl->i != ftl->it_max && e->number == 3)

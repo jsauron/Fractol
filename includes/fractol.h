@@ -43,7 +43,7 @@
 */
 
 # define BETA 0.1
-
+# define NBTHREAD 8	
 /*
 **      Keys
 */
@@ -143,6 +143,8 @@ typedef	struct		s_env
 	t_coord		*coord;
 	t_matrice	m;
 	t_line		*line;
+	int		center_y;
+	int		center_x;
 
 }			t_env;
 
@@ -171,7 +173,7 @@ void	image_err(void);
 */
 
 void	draw(t_env *e, t_fractal *ftl,  t_img *image);
-void	calc_fractal(t_env *e, t_fractal *fractal, t_point *p);
+void	calc_fractal(t_env *e, t_fractal *fractal, t_point *p, int x, int y);
 
 /*
 **      init_fractal.c
@@ -219,7 +221,7 @@ void	get_color(t_env *e);
 */
 
 void    calc_all_points(t_env *e,t_fractal *ftl);
-void    calc_matrice(/*t_env *e,*/ t_matrice *m, t_point *p);
+void    calc_matrice(t_env *e, t_matrice *m, t_point *p);
 void    rot_x(t_env *e);
 void    rot_y(t_env *e);
 void    rot_z(t_env *e);
