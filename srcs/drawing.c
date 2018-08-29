@@ -35,9 +35,9 @@ void    calc_fractal(t_env *e, t_fractal *ftl, t_point *p, int x, int y)
 	e->coord = coord;
 	if (e->number == 1)
                 init_mendel_2(ftl, *p);
-        if (e->number == 2)
+        else if (e->number == 2)
                 init_julia_2(ftl, *p);
-	if (e->number == 3)
+	else if (e->number == 3)
 		init_buddhabrot_2(ftl, *p);	
 	while (((pow(ftl->z_r, 2) + pow(ftl->z_i, 2)) < 4) && ftl->i < ftl->it_max)
         {	
