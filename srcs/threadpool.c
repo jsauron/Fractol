@@ -13,7 +13,6 @@ static  void    *threadpool_thread(void *threadpool)
 		pthread_mutex_lock(&(pool->lock));
 		while ((pool->count == 0) && (!pool->shutdown))
 			pthread_cond_wait(&(pool->notify), &(pool->lock));
-
 		if((pool->shutdown == immediate_shutdown) ||
 				((pool->shutdown == graceful_shutdown) &&
 				 (pool->count == 0)))
@@ -39,11 +38,11 @@ t_threadpool *threadpool_create(int thread_count, int queue_size)
 	i = 0;
 	if (thread_count <= 0 || thread_count > MAX_THREADS ||
 			queue_size <= 0 || queue_size > MAX_QUEUE) 
-		return NULL;
+		return (NULL);
 	if (!(pool = (t_threadpool *)malloc(sizeof(t_threadpool))))
 		err_pool(pool);
-	if (init_pool(pool) == 0)
-		return NULL;
+	if (init_pool(pool, queue_size, thread_count) == 0)
+		return (NULL);
 	while (i < thread_count)
 	{
 		if (pthread_create(&(pool->threads[i]), NULL,

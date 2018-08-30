@@ -5,7 +5,7 @@ void	draw(t_env *e, t_fractal *ftl, t_img *image)
 {
 	int		x;
 	int 		y;
-	t_point		p;
+//	t_point		p;
 
 	calc_all_points(e, ftl);	
 	if (e->number == 3)
@@ -16,7 +16,7 @@ void	draw(t_env *e, t_fractal *ftl, t_img *image)
 			x = 0;
 			while (x < ftl->img_x)
 			{	
-				p = e->line[y].point[x];
+	//			p = e->line[y].point[x];
                                 set_pixel_img(e, x, y,
                                 rgb(0, 0 , image->data[x + y * ftl->img_x] * 255 /15));
 				x++;
@@ -28,11 +28,22 @@ void	draw(t_env *e, t_fractal *ftl, t_img *image)
 	mlx_put_image_to_window(e->mlx, e->win, image->img, 0, 0);
 }
 
-void    calc_fractal(t_env *e, t_fractal *ftl, t_point *p, int x, int y)
+void    calc_fractal(void *arguments)
 {
-	t_coord		coord[ftl->it_max];
+	t_point		*p;
+	t_env		*e;
+	t_fractal	*ftl;
+	int		x;
+	int		y;
 
+	e = ((t_arg *)arguments)->e;
+	ftl = ((t_arg *)arguments)->ftl;
+	x = ((t_arg *)arguments)->x;
+	y = ((t_arg *)arguments)->y;
+	p = &e->line[y].point[x];
+	t_coord         coord[ftl->it_max];
 	e->coord = coord;
+	calc_matrice(e,&e->m, p);
 	if (e->number == 1)
                 init_mendel_2(ftl, *p);
         else if (e->number == 2)

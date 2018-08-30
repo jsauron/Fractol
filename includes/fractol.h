@@ -134,6 +134,15 @@ typedef struct  s_img
 
 }                               t_img;
 
+typedef	struct		s_arg
+{
+	void		*e;
+	t_fractal	*ftl;
+	int		x;
+	int		y;
+
+}			t_arg;
+
 typedef	struct		s_env
 {
 	void		*mlx;
@@ -147,6 +156,8 @@ typedef	struct		s_env
 	t_line		*line;
 	int		center_y;
 	int		center_x;
+	t_threadpool	*pool;
+	t_arg		*arg;
 
 }			t_env;
 
@@ -179,7 +190,7 @@ void	image_err(void);
 */
 
 void	draw(t_env *e, t_fractal *ftl,  t_img *image);
-void	calc_fractal(t_env *e, t_fractal *fractal, t_point *p, int x, int y);
+void	calc_fractal(void *arguments);
 
 /*
 **      init_fractal.c

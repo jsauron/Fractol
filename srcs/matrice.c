@@ -4,7 +4,6 @@ void	calc_all_points(t_env *e, t_fractal *ftl)
 {
 	int x;
 	int y;
-	t_point		*p;
 
 	y = 0;
 	while (y < ftl->img_y)
@@ -12,10 +11,7 @@ void	calc_all_points(t_env *e, t_fractal *ftl)
 		x = 0;
 		while (x < ftl->img_x)
 		{
-			
-			p = &e->line[y].point[x];
-			calc_matrice(e,&e->m, p);
-			calc_fractal(e, ftl, p, x, y);
+			threadpool_add(e->pool, calc_fractal, &e->arg[x + y *ftl->img_x]);
 			x++;
 		}
 		y++;

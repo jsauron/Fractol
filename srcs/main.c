@@ -18,6 +18,7 @@ int		main(int ac, char **av)
 
 	check_fractal(ac, av, &e);
 	init(&e);
+	e.pool = threadpool_create(12, e.ftl.img_x * e.ftl.img_y);
 	get_center(&e);
 	draw(&e, &e.ftl, &e.image);
 	mlx_hook(e.win, 2, 1, key, &e);

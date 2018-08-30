@@ -22,6 +22,23 @@ void	init_point(t_env *e, t_fractal *ftl)
 		}
 		y++;
 	}
+	if (!(e->arg = (t_arg *)malloc(sizeof(t_arg) * ftl->img_x * ftl->img_y)))
+		err_malloc();
+	y = 0;
+	while (y < ftl->img_y)
+	{
+		x = 0;
+		while (x < ftl->img_x)
+		{
+			e->arg[x + y * ftl->img_x].e = &e;
+			e->arg[x + y * ftl->img_x].ftl = &e->ftl;
+			e->arg[x + y * ftl->img_x].x = x;
+			e->arg[x + y * ftl->img_x].y = y;
+			x++;
+		}
+		y++;
+	}
+
 }
 
 void    init_fractal(t_env *e)
