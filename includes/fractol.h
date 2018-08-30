@@ -9,20 +9,7 @@
 # include <stdio.h>
 # include <math.h>
 # include <pthread.h>
-
-typedef struct threadpool_t threadpool_t;
-
-typedef enum {
-    threadpool_invalid        = -1,
-    threadpool_lock_failure   = -2,
-    threadpool_queue_full     = -3,
-    threadpool_shutdown       = -4,
-    threadpool_thread_failure = -5
-} threadpool_error_t;
-
-typedef enum {
-    threadpool_graceful       = 1
-} threadpool_destroy_flags_t;
+# include "threadpool.h"
 
 /*
 **       Colors text
@@ -56,8 +43,6 @@ typedef enum {
 **	Params
 */
 
-# define MAX_THREADS 64
-# define MAX_QUEUE 65536
 # define BETA 0.1
 
 
