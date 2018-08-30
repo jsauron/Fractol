@@ -17,8 +17,8 @@ void	draw(t_env *e, t_fractal *ftl, t_img *image)
 			while (x < ftl->img_x)
 			{	
 				p = e->line[y].point[x];
-                                set_pixel_img(e, p.x, p.y,
-                                rgb(0, 0 , image->data[p.x + p.y * ftl->img_x] * 255 /15));
+                                set_pixel_img(e, x, y,
+                                rgb(0, 0 , image->data[x + y * ftl->img_x] * 255 /15));
 				x++;
 			}
 			y++;		
@@ -38,7 +38,7 @@ void    calc_fractal(t_env *e, t_fractal *ftl, t_point *p, int x, int y)
         else if (e->number == 2)
                 init_julia_2(ftl, *p);
 	else if (e->number == 3)
-		init_buddhabrot_2(ftl, *p);	
+		init_buddhabrot_2(ftl, *p);
 	while (((pow(ftl->z_r, 2) + pow(ftl->z_i, 2)) < 4) && ftl->i < ftl->it_max)
         {	
                 ftl->tmp = ftl->z_r;
@@ -70,7 +70,7 @@ void    calc_fractal(t_env *e, t_fractal *ftl, t_point *p, int x, int y)
 			if ((coord[ftl->i].x > 0 && coord[ftl->i].x < ftl->img_x) &&
 				(coord[ftl->i].y > 0 && coord[ftl->i].y < ftl->img_y))
 			{
-				e->image.data[coord[ftl->i].x + coord[ftl->i].y * ftl->img_x] += 1;
+				e->image.data[x + y * ftl->img_x] += 1;
 			}
 		}
 		

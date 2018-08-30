@@ -11,8 +11,8 @@ int long	rgb(int r, int g, int b)
 
 void	get_center(t_env *e)
 {
-	e->ftl.center_x = (e->ftl.img_x) / 2;
-	e->ftl.center_y = (e->ftl.img_y) / 2;
+	e->center_x = (e->ftl.img_x) / 2;
+	e->center_y = (e->ftl.img_y) / 2;
 	printf("center x = %d\n", e->ftl.center_x);
 }
 

@@ -9,7 +9,7 @@
 # include <stdio.h>
 # include <math.h>
 # include <pthread.h>
-
+# include "threadpool.h"
 
 typedef struct threadpool_t threadpool_t;
 
@@ -97,8 +97,8 @@ typedef	struct		s_matrice
 
 typedef struct		s_point
 {
-	int		x;
-	int		y;
+	double		x;
+	double		y;
 	double		z;
 
 }			t_point;
