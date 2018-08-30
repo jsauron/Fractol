@@ -48,8 +48,10 @@ void	zoom(t_env *e, t_fractal *ftl, t_coord *coord, float zoom)
 	double		tmp_x;
 	double		tmp_y;
 
-	tmp_x = (((ftl->x2 - ftl->x1) * (double)coord->x / ftl->img_x) + ftl->x1);
-	tmp_y = (((ftl->y2 - ftl->y1) * (double)coord->y / ftl->img_y) + ftl->y1);	
+	tmp_x = (((ftl->x2 - ftl->x1) *
+		(double)coord->x / ftl->img_x) + ftl->x1);
+	tmp_y = (((ftl->y2 - ftl->y1) *
+		(double)coord->y / ftl->img_y) + ftl->y1);	
 	ftl->x1 = tmp_x - (tmp_x - ftl->x1) * zoom;
 	ftl->x2 = tmp_x + (ftl->x2 - tmp_x) * zoom;
 	ftl->y1 = tmp_y - (tmp_y - ftl->y1) * zoom;
@@ -57,6 +59,7 @@ void	zoom(t_env *e, t_fractal *ftl, t_coord *coord, float zoom)
 	ftl->it_max /= zoom;
         ftl->zoom_x = ftl->img_x / (ftl->x2 - ftl->x1);
         ftl->zoom_y = ftl->img_y / (ftl->y2 - ftl->y1);
+	init_matrice(e);
 	clear_img(e);
 	draw(e, ftl, &e->image);	
 }
@@ -81,6 +84,7 @@ void	move(t_env *e, t_fractal *ftl, float move_x, float move_y)
         ftl->y2 += move_y;
         ftl->zoom_x = ftl->img_x / (ftl->x2 - ftl->x1);
         ftl->zoom_y = ftl->img_y / (ftl->y2 - ftl->y1);
+	init_matrice(e);
         clear_img(e);
         draw(e, ftl,  &e->image);
 }

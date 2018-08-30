@@ -1,5 +1,5 @@
 
-#ifndef TREADPOOL_H
+#ifndef THREADPOOL_H
 #define THREADPOOL_H
 
 #include <stdlib.h>
@@ -9,28 +9,28 @@
 # define MAX_THREAD 64
 # define MAX_QUEUE 65536
 
-typedef struct			s_threadpool
-{
-	  pthread_mutex_t 	lock;
-  	pthread_cond_t 		notify;
-  	pthread_t 		*threads;
-  	threadpool_task_t 	*queue;
-  	int			thread_count;
-  	int			queue_size;
-  	int			head;
-  	int			tail;
-  	int			count;
-  	int			shutdown;
-  	int			started;
-
-}				t_threadpool;
-
-typedef struct 		s_threadpool_task;
+typedef struct 		s_threadpool_task
 {
     void 		(*function)(void *);
     void 		*argument;
 
 } 			t_threadpool_task;
+
+typedef struct                  s_threadpool
+{
+        pthread_mutex_t         lock;
+        pthread_cond_t          notify;
+        pthread_t               *threads;
+        t_threadpool_task       *queue;
+        int                     thread_count;
+        int                     queue_size;
+        int                     head;
+        int                     tail;
+        int                     count;
+        int                     shutdown;
+        int                     started;
+
+}                               t_threadpool;
 
 typedef  enum	 		s_threadpool_shutdown
 {
@@ -51,7 +51,7 @@ typedef	enum	 		s_threadpool_error
 
 typedef enum			s_threadpool_destroy_flags
 {
-	threadpool_graceful = 1;
+	threadpool_graceful = 1
 
 }				t_threadpool_destroy_flags;
 

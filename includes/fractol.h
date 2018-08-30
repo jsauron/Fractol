@@ -9,7 +9,6 @@
 # include <stdio.h>
 # include <math.h>
 # include <pthread.h>
-# include "threadpool.h"
 
 typedef struct threadpool_t threadpool_t;
 
@@ -248,4 +247,11 @@ void    rot_x(t_env *e);
 void    rot_y(t_env *e);
 void    rot_z(t_env *e);
 
+/*
+**      draw_3D.c
+*/
+
+void    bresenham_tab(int *tab, t_point p1, t_point p2);
+void    draw_pixel(t_env *e, t_point p1, t_point p2, int color);
+void    draw_line(t_env *e, t_point p1, int x, int y);
 #endif

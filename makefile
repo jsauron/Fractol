@@ -21,7 +21,8 @@
 	srcs/init.c \
 	srcs/init_fractal.c \
 	srcs/tools.c \
-	srcs/matrice.c
+	srcs/matrice.c \
+	srcs/draw_3D.c
 
 OBJS = $(SRC:.c=.o)
 

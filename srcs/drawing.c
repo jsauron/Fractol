@@ -39,19 +39,21 @@ void    calc_fractal(t_env *e, t_fractal *ftl, t_point *p, int x, int y)
                 init_julia_2(ftl, *p);
 	else if (e->number == 3)
 		init_buddhabrot_2(ftl, *p);
-	while (((pow(ftl->z_r, 2) + pow(ftl->z_i, 2)) < 4) && ftl->i < ftl->it_max)
+	while (((pow(ftl->z_r, 2) + pow(ftl->z_i, 2)) < 4) &&
+		ftl->i < ftl->it_max)
         {	
                 ftl->tmp = ftl->z_r;
                 ftl->z_r = (pow(ftl->z_r, 2)) - (pow(ftl->z_i, 2)) + ftl->c_r;
                 ftl->z_i = 2 * ftl->z_i * ftl->tmp + ftl->c_i;
 		if (e->number == 3)
 		{
-			coord[ftl->i].x = (ftl->z_r - ftl->x1) * (double)ftl->zoom_x;
-			coord[ftl->i].y = (ftl->z_i - ftl->y1) * (double)ftl->zoom_y;
+			coord[ftl->i].x = (ftl->z_r - ftl->x1) *
+				(double)ftl->zoom_x;
+			coord[ftl->i].y = (ftl->z_i - ftl->y1) *
+				(double)ftl->zoom_y;
         	}
 		ftl->i++;
 	}
-	calc_matrice(e,&e->m, p);
         if (ftl->i == ftl->it_max && (e->number == 1 || e->number == 2))
 	{
 		set_pixel_img(e, x, y, BLACK);
@@ -59,16 +61,19 @@ void    calc_fractal(t_env *e, t_fractal *ftl, t_point *p, int x, int y)
 	}
 	if (ftl->i != ftl->it_max && (e->number == 1 || e->number == 2))
         {
-	       set_pixel_img(e, x, y, rgb(0, 0 ,e->ftl.i * 255 / 50));
 		p->z = e->ftl.i * 255 / 50;
+		draw_line(e, *p, x, y);
+		//set_pixel_img(e, x, y, rgb(0, 0 ,e->ftl.i * 255 / 50));
 	}
 	if (ftl->i != ftl->it_max && e->number == 3)
 	{
 		while (ftl->i > 0)
 		{
 			ftl->i--;		
-			if ((coord[ftl->i].x > 0 && coord[ftl->i].x < ftl->img_x) &&
-				(coord[ftl->i].y > 0 && coord[ftl->i].y < ftl->img_y))
+			if ((coord[ftl->i].x > 0 &&
+				coord[ftl->i].x < ftl->img_x) &&
+				(coord[ftl->i].y > 0 &&
+				coord[ftl->i].y < ftl->img_y))
 			{
 				e->image.data[x + y * ftl->img_x] += 1;
 			}

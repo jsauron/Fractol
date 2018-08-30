@@ -34,6 +34,7 @@ void	init(t_env *e)
         init_img(e);
         init_point(e, &e->ftl);
 }
+
 void	init_matrice(t_env *e)
 {
 	e->m.x_a = 1;
