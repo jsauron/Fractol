@@ -39,7 +39,7 @@ int	threadpool_add(t_threadpool *pool, void (*function)(void *), void *argument,
 	
 	if (pool == NULL ||function == NULL)
         	return (threadpool_invalid);
-	if (pthread_mutex_lock(&pool->lock))
+	if (pthread_mutex_lock(&(pool->lock)))
         	return (threadpool_lock_failure);
 	next = (pool->tail + 1) % pool->queue_size;
 	
@@ -60,7 +60,7 @@ int	threadpool_add(t_threadpool *pool, void (*function)(void *), void *argument,
         pool->tail = next;
         pool->count += 1;
 
-        if (pthread_cond_signal(&pool->notify))
+        if (pthread_cond_signal(&(pool->notify)))
 	{
             	err = threadpool_lock_failure;
             	break;
@@ -80,7 +80,7 @@ int	threadpool_destroy(t_threadpool *pool, int flags)
     	if (pool == NULL) 
         	return (threadpool_invalid);
 
-  	if (pthread_mutex_lock(&pool->lock)) 
+  	if (pthread_mutex_lock(&(pool->lock))) 
     		return (threadpool_lock_failure);
 
         if (pool->shutdown)
@@ -89,11 +89,11 @@ int	threadpool_destroy(t_threadpool *pool, int flags)
          	break;
         }
 
-        pool->shutdown = (flags && threadpool_graceful) ?
+        pool->shutdown = (flags & threadpool_graceful) ?
             graceful_shutdown : immediate_shutdown;
 
-        if ((pthread_cond_broadcast(&pool->notify)) ||
-           (pthread_mutex_unlock(&pool->lock))) 
+        if ((pthread_cond_broadcast(&(pool->notify))) ||
+           (pthread_mutex_unlock(&(pool->lock)))) 
 	{
         	err = threadpool_lock_failure;
         	break;
@@ -119,9 +119,9 @@ static void	*threadpool_thread(void *threadpool)
 
     	while (1)
 	{
-        	pthread_mutex_lock(&pool->lock);
+        	pthread_mutex_lock(&(pool->lock));
         	while ((pool->count == 0) && (!pool->shutdown))
-            		pthread_cond_wait(&pool->notify, &pool->lock);
+            		pthread_cond_wait(&(pool->notify), &(pool->lock));
 
         	if((pool->shutdown == immediate_shutdown) ||
            	((pool->shutdown == graceful_shutdown) &&
@@ -136,7 +136,7 @@ static void	*threadpool_thread(void *threadpool)
     	}
     	pool->started--;
 
-    	pthread_mutex_unlock(&pool->lock);
+    	pthread_mutex_unlock(&(pool->lock));
     	pthread_exit(NULL);
    	return NULL;
 }

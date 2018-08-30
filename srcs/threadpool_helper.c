@@ -34,9 +34,9 @@ int     threadpool_free(t_threadpool *pool)
         {
                 free(pool->threads);
                 free(pool->queue);
-                pthread_mutex_lock(&pool->lock);
-                pthread_mutex_destroy(&pool->lock);
-                pthread_cond_destroy(&pool->notify);
+                pthread_mutex_lock(&(pool->lock));
+                pthread_mutex_destroy(&(pool->lock));
+                pthread_cond_destroy(&(pool->notify));
         }
         free(pool);
         return (0);
