@@ -41,9 +41,8 @@ t_threadpool *threadpool_create(int thread_count, int queue_size)
 			queue_size <= 0 || queue_size > MAX_QUEUE) 
 		return NULL;
 	if (!(pool = (t_threadpool *)malloc(sizeof(t_threadpool))))
-		err_pool(&pool);
-
-	if (init_pool(&pool, queue_size, thread_count) == 0)
+		err_pool(pool);
+	if (init_pool(pool) == 0)
 		return NULL;
 	while (i < thread_count)
 	{

@@ -22,7 +22,9 @@
 	srcs/init_fractal.c \
 	srcs/tools.c \
 	srcs/matrice.c \
-	srcs/draw_3D.c
+	srcs/draw_3D.c \
+	srcs/threadpool.c \
+	srcs/threadpool_helper.c
 
 OBJS = $(SRC:.c=.o)
 
@@ -30,12 +32,14 @@ INCLUDES = includes/
 
 MLX = -L ./minilibx_macos -lmlx -framework OpenGL -framework AppKit
 
+PTHREAD = -l pthread 
+
 DONE = "\033[35m Fractol ready\033[0m"
 
 all: lib $(NAME)
 
 $(NAME):$(OBJS)
-	@gcc  -fsanitize=address -Wall -Wextra -Werror -o $(NAME) libft/libft.a $(OBJS) -I $(INCLUDES) $(MLX)
+	@gcc  -fsanitize=address -Wall -Wextra -Werror -o $(NAME) libft/libft.a $(OBJS) -I $(INCLUDES) $(MLX) $(PTHREAD)
 	@echo $(DONE)
 
 lib:

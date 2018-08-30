@@ -6,7 +6,7 @@
 #include <pthread.h>
 #include <unistd.h>
 
-# define MAX_THREAD 64
+# define MAX_THREADS 64
 # define MAX_QUEUE 65536
 
 typedef struct 		s_threadpool_task
@@ -60,8 +60,8 @@ typedef enum			s_threadpool_destroy_flags
 */
 
 t_threadpool	*threadpool_create(int thread_count, int queue_size);
-int		threadpool_add(t_threadpool *pool, void (*routine)(void *),
-				void *arg, int flags);
+int		threadpool_add(t_threadpool *pool, void (*function)(void *),
+				void *arg);
 int		threadpool_destroy(t_threadpool *pool, int flags);
 //static void	*threadpool_thread(void *threadpool);
 
@@ -69,8 +69,8 @@ int		threadpool_destroy(t_threadpool *pool, int flags);
 **      threadpool_helper.c
 */
 
-int    init_pool(t_threadpool *pool);
-void    *err_pool(t_threadpool *pool);
+int    init_pool(t_threadpool *pool, int queue_size, int thread_count);
+int	err_pool(t_threadpool *pool);
 int     threadpool_free(t_threadpool *pool);
 
 #endif 
