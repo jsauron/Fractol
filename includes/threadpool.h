@@ -59,17 +59,17 @@ typedef enum			s_threadpool_destroy_flags
 **	threadpool.c
 */
 
-t_threadpool	*threadpool_create(int thread_count, int queu_size, int flags);
+t_threadpool	*threadpool_create(int thread_count, int queue_size);
 int		threadpool_add(t_threadpool *pool, void (*routine)(void *),
 				void *arg, int flags);
 int		threadpool_destroy(t_threadpool *pool, int flags);
-static void	*threadpool_thread(void *threadpool);
+//static void	*threadpool_thread(void *threadpool);
 
 /*
 **      threadpool_helper.c
 */
 
-t_threadpool    init_pool(t_threadpool *pool);
+int    init_pool(t_threadpool *pool);
 void    *err_pool(t_threadpool *pool);
 int     threadpool_free(t_threadpool *pool);
 
