@@ -1,5 +1,6 @@
 
 #include "../includes/threadpool.h"
+#include <stdio.h>
 
 static  void    *threadpool_thread(void *threadpool)
 {
@@ -30,27 +31,33 @@ static  void    *threadpool_thread(void *threadpool)
 	return (NULL);
 }
 
-t_threadpool *threadpool_create(int thread_count, int queue_size)
+t_threadpool	*threadpool_create(int thread_count, int queue_size)
 {
 	t_threadpool	*pool;
 	int		i;
 
 	i = 0;
+	printf("debut\n");
+	printf("queu size = %d\n", queue_size);
+	printf("max q = %d\n", MAX_QUEUE);
 	if (thread_count <= 0 || thread_count > MAX_THREADS ||
-			queue_size <= 0 || queue_size > MAX_QUEUE) 
+		queue_size <= 0 || queue_size > MAX_QUEUE) 
 		return (NULL);
+	printf("kaka\n");
 	if (!(pool = (t_threadpool *)malloc(sizeof(t_threadpool))))
 		err_pool(pool);
 	if (init_pool(pool, queue_size, thread_count) == 0)
 		return (NULL);
+	printf("ici\n");
 	while (i < thread_count)
 	{
 		if (pthread_create(&(pool->threads[i]), NULL,
-					threadpool_thread, (void*)pool))
+					threadpool_thread, (void*)pool) != 0)
 		{
 			threadpool_destroy(pool, 0);
 			return NULL;
 		}
+		printf("la\n");
 		pool->thread_count++;
 		pool->started++;
 		i++;	

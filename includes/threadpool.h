@@ -7,7 +7,7 @@
 #include <unistd.h>
 
 # define MAX_THREADS 64
-# define MAX_QUEUE 65536
+# define MAX_QUEUE 700000
 
 typedef struct 		s_threadpool_task
 {

@@ -44,12 +44,18 @@ void    calc_fractal(void *arguments)
 	t_complex	cmp;
 
 	i = 0;
+	printf("calc1\n");
 	e = ((t_arg *)arguments)->e;
+	printf("calci2\n");
         x = ((t_arg *)arguments)->x;
+	printf("calc3\n");
         y = ((t_arg *)arguments)->y;
+	printf("calc4\n");
         cmp = ((t_arg *)arguments)->cmp;
+	printf("calc5\n");
         ftl = ((t_arg *)arguments)->ftl;
 	p = &e->line[y].point[x];
+	printf("calc\n");
 	calc_matrice(e,&e->m, p);
 	if (e->number == 1)
                 init_mendel_2(ftl, cmp, *p);
