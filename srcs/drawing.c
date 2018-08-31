@@ -35,6 +35,7 @@ void	draw(t_env *e, t_fractal *ftl, t_img *image)
 void    calc_fractal(void *arguments)
 {
 	t_point		*p;
+	t_line		*l;
 	t_env		*e;
 	t_fractal	*ftl;
 	int		x;
@@ -54,9 +55,12 @@ void    calc_fractal(void *arguments)
         cmp = ((t_arg *)arguments)->cmp;
 	printf("calc5\n");
         ftl = ((t_arg *)arguments)->ftl;
+	printf("x = %d\n", x);
+	l = &e->line[y];
+	printf("y = %d\n", y);
 	p = &e->line[y].point[x];
-	printf("calc\n");
-	calc_matrice(e,&e->m, p);
+	printf("calc6\n");
+	calc_matrice(e, &e->m, p);
 	if (e->number == 1)
                 init_mendel_2(ftl, cmp, *p);
         else if (e->number == 2)
