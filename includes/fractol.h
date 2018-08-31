@@ -79,6 +79,13 @@ typedef	struct		s_matrice
 
 }			t_matrice;
 
+typedef struct		s_coord
+{
+	int	x;
+	int	y;
+
+}			t_coord;
+
 typedef struct		s_point
 {
 	double		x;
@@ -93,32 +100,27 @@ typedef struct		s_line
 
 }			t_line;
 
-typedef struct		s_coord
+typedef struct		s_complex
 {
-	int	x;
-	int	y;
-
-}			t_coord;
+        double          c_r;
+        double          c_i;
+        double          z_r;
+        double          z_i;
+	
+}			t_complex;
 
 typedef struct           s_fractal
 {
-	int		i;
-	double		tmp;
+	double          x1;
+        double          x2;
+        double          y1;
+        double          y2;
 	int		it_max;
-	double		c_r;
-	double		c_i;
-	double		z_r;
-	double		z_i;
-	double		x1;
-	double		x2;
-	double		y1;
-	double		y2;
 	int		img_x;
 	int		img_y;
 	int		zoom_x;
-	int		zoom_y;	
-	int		center_x;
-	int		center_y;	
+	int		zoom_y;
+	
 }                       t_fractal;
 
 typedef struct  s_img
@@ -140,6 +142,7 @@ typedef	struct		s_arg
 	t_fractal	*ftl;
 	int		x;
 	int		y;
+	t_complex	cmp;
 
 }			t_arg;
 
@@ -151,7 +154,6 @@ typedef	struct		s_env
 	t_fractal	ftl;
 	int		number;
 	t_img		image;
-	t_coord		*coord;
 	t_matrice	m;
 	t_line		*line;
 	int		center_y;
@@ -189,7 +191,7 @@ void	image_err(void);
 **	drawing.c
 */
 
-void	draw(t_env *e, t_fractal *ftl,  t_img *image);
+void	draw(t_env *e, t_fractal *ftl, t_img *image);
 void	calc_fractal(void *arguments);
 
 /*
@@ -198,11 +200,11 @@ void	calc_fractal(void *arguments);
 
 void	init_point(t_env *e, t_fractal *ftl);
 void    init_mendel(t_fractal *ftl);
-void    init_mendel_2(t_fractal *ftl, t_point p);
+void    init_mendel_2(t_fractal *ftl, t_complex cmp, t_point p);
 void    init_julia(t_fractal *ftl);
-void    init_julia_2(t_fractal *ftl, t_point p);
+void    init_julia_2(t_fractal *ftl, t_complex cmp, t_point p);
 void	init_buddhabrot(t_fractal *ftl);
-void    init_buddhabrot_2(t_fractal *ftl, t_point p);
+void    init_buddhabrot_2(t_fractal *ftl, t_complex cmp, t_point p);
 
 /*
 **	hook.c
@@ -212,7 +214,7 @@ int	key(int key, t_env *e);
 int	motion_notify(int x, int y, t_env *e);
 int	button_press(int key, int x, int y, t_env *e);
 int	destroy_notify(t_env *e);
-void	zoom(t_env *e, t_fractal *ftl, t_coord *coord, float zoom);
+void	zoom(t_env *e, int x, int y, float zoom);
 void	move(t_env *e, t_fractal *ftl, float move_x, float move_y);
 void	key_move(t_env *e, int key);
 void	change_fractal(t_env *e);

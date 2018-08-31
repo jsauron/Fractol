@@ -25,12 +25,10 @@ int		motion_notify(int x, int y, t_env *e)
 
 int		button_press(int key, int x, int y, t_env *e)
 {
-	e->coord->x = x;
-	e->coord->y = y;
 	if (key == CLIK || key == ZOOM_PLUS)
-		zoom(e, &e->ftl, e->coord, 0.95);
+		zoom(e, x, y, 0.95);
 	if (key == ZOOM_LESS)
-		zoom(e, &e->ftl,  e->coord, 1.05);
+		zoom(e, x, y, 1.05);
 	if (key == ROT_X || key == ROT_Y)
 		rot(e, key);
 	printf(" %d\n", key);
@@ -43,25 +41,25 @@ int	destroy_notify(t_env *e)
 	return (0);
 }
 
-void	zoom(t_env *e, t_fractal *ftl, t_coord *coord, float zoom)
+void	zoom(t_env *e, int x, int y, float zoom)
 {
 	double		tmp_x;
 	double		tmp_y;
 
-	tmp_x = (((ftl->x2 - ftl->x1) *
-		(double)coord->x / ftl->img_x) + ftl->x1);
-	tmp_y = (((ftl->y2 - ftl->y1) *
-		(double)coord->y / ftl->img_y) + ftl->y1);	
-	ftl->x1 = tmp_x - (tmp_x - ftl->x1) * zoom;
-	ftl->x2 = tmp_x + (ftl->x2 - tmp_x) * zoom;
-	ftl->y1 = tmp_y - (tmp_y - ftl->y1) * zoom;
-	ftl->y2 = tmp_y + (ftl->y2 - tmp_y) * zoom;
-	ftl->it_max /= zoom;
-        ftl->zoom_x = ftl->img_x / (ftl->x2 - ftl->x1);
-        ftl->zoom_y = ftl->img_y / (ftl->y2 - ftl->y1);
+	tmp_x = (((e->ftl.x2 - e->ftl.x1) *
+		(double)x / e->ftl.img_x) + e->ftl.x1);
+	tmp_y = (((e->ftl.y2 - e->ftl.y1) *
+		(double)y / e->ftl.img_y) + e->ftl.y1);	
+	e->ftl.x1 = tmp_x - (tmp_x - e->ftl.x1) * zoom;
+	e->ftl.x2 = tmp_x + (e->ftl.x2 - tmp_x) * zoom;
+	e->ftl.y1 = tmp_y - (tmp_y - e->ftl.y1) * zoom;
+	e->ftl.y2 = tmp_y + (e->ftl.y2 - tmp_y) * zoom;
+	e->ftl.it_max /= zoom;
+        e->ftl.zoom_x = e->ftl.img_x / (e->ftl.x2 - e->ftl.x1);
+        e->ftl.zoom_y = e->ftl.img_y / (e->ftl.y2 - e->ftl.y1);
 	init_matrice(e);
 	clear_img(e);
-	draw(e, ftl, &e->image);	
+	draw(e, &e->ftl, &e->image);	
 }
 
 void	key_move(t_env *e, int key)

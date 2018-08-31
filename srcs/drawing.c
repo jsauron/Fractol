@@ -6,8 +6,11 @@ void	draw(t_env *e, t_fractal *ftl, t_img *image)
 	int		x;
 	int 		y;
 //	t_point		p;
+	int		i;
 
+	i = 0;
 	calc_all_points(e, ftl);	
+	i++;
 	if (e->number == 3)
 	{
 		y = 0;
@@ -25,7 +28,8 @@ void	draw(t_env *e, t_fractal *ftl, t_img *image)
 		}
 	}
 	printf("DRAW\n");
-	mlx_put_image_to_window(e->mlx, e->win, image->img, 0, 0);
+	if (i == ftl->img_x * ftl->img_y)
+		mlx_put_image_to_window(e->mlx, e->win, image->img, 0, 0);
 }
 
 void    calc_fractal(void *arguments)
@@ -35,56 +39,60 @@ void    calc_fractal(void *arguments)
 	t_fractal	*ftl;
 	int		x;
 	int		y;
+	int 		i;
+	int		tmp;
+	t_complex	cmp;
 
+	i = 0;
 	e = ((t_arg *)arguments)->e;
-	ftl = ((t_arg *)arguments)->ftl;
-	x = ((t_arg *)arguments)->x;
-	y = ((t_arg *)arguments)->y;
+        x = ((t_arg *)arguments)->x;
+        y = ((t_arg *)arguments)->y;
+        cmp = ((t_arg *)arguments)->cmp;
+        ftl = ((t_arg *)arguments)->ftl;
 	p = &e->line[y].point[x];
-	t_coord         coord[ftl->it_max];
-	e->coord = coord;
 	calc_matrice(e,&e->m, p);
 	if (e->number == 1)
-                init_mendel_2(ftl, *p);
+                init_mendel_2(ftl, cmp, *p);
         else if (e->number == 2)
-                init_julia_2(ftl, *p);
+                init_julia_2(ftl, cmp, *p);
 	else if (e->number == 3)
-		init_buddhabrot_2(ftl, *p);
-	while (((pow(ftl->z_r, 2) + pow(ftl->z_i, 2)) < 4) &&
-		ftl->i < ftl->it_max)
+		init_buddhabrot_2(ftl, cmp, *p);
+        t_coord         coord[ftl->it_max];
+	while (((pow(cmp.z_r, 2) + pow(cmp.z_i, 2)) < 4) &&
+		i < ftl->it_max)
         {	
-                ftl->tmp = ftl->z_r;
-                ftl->z_r = (pow(ftl->z_r, 2)) - (pow(ftl->z_i, 2)) + ftl->c_r;
-                ftl->z_i = 2 * ftl->z_i * ftl->tmp + ftl->c_i;
+                tmp = cmp.z_r;
+                cmp.z_r = (pow(cmp.z_r, 2)) - (pow(cmp.z_i, 2)) + cmp.c_r;
+                cmp.z_i = 2 * cmp.z_i * tmp + cmp.c_i;
 		if (e->number == 3)
 		{
-			coord[ftl->i].x = (ftl->z_r - ftl->x1) *
+			coord[i].x = (cmp.z_r - ftl->x1) *
 				(double)ftl->zoom_x;
-			coord[ftl->i].y = (ftl->z_i - ftl->y1) *
+			coord[i].y = (cmp.z_i - ftl->y1) *
 				(double)ftl->zoom_y;
         	}
-		ftl->i++;
+		i++;
 	}
-        if (ftl->i == ftl->it_max && (e->number == 1 || e->number == 2))
+        if (i == ftl->it_max && (e->number == 1 || e->number == 2))
 	{
 		set_pixel_img(e, x, y, BLACK);
 		p->z = BLACK;
 	}
-	if (ftl->i != ftl->it_max && (e->number == 1 || e->number == 2))
+	if (i != ftl->it_max && (e->number == 1 || e->number == 2))
         {
-		p->z = e->ftl.i * 255 / 50;
+		p->z = i * 255 / 50;
 		draw_line(e, *p, x, y);
 		//set_pixel_img(e, x, y, rgb(0, 0 ,e->ftl.i * 255 / 50));
 	}
-	if (ftl->i != ftl->it_max && e->number == 3)
+	if (i != ftl->it_max && e->number == 3)
 	{
-		while (ftl->i > 0)
+		while (i > 0)
 		{
-			ftl->i--;		
-			if ((coord[ftl->i].x > 0 &&
-				coord[ftl->i].x < ftl->img_x) &&
-				(coord[ftl->i].y > 0 &&
-				coord[ftl->i].y < ftl->img_y))
+			i--;		
+			if ((coord[i].x > 0 &&
+				coord[i].x < ftl->img_x) &&
+				(coord[i].y > 0 &&
+				coord[i].y < ftl->img_y))
 			{
 				e->image.data[x + y * ftl->img_x] += 1;
 			}

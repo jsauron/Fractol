@@ -15,7 +15,6 @@
 int		main(int ac, char **av)
 {
 	t_env	e;
-
 	check_fractal(ac, av, &e);
 	init(&e);
 	e.pool = threadpool_create(12, e.ftl.img_x * e.ftl.img_y);

@@ -64,14 +64,12 @@ void    init_mendel( t_fractal *ftl)
 	ftl->it_max = 50;
 }
 
-void	init_mendel_2(t_fractal *ftl, t_point p)
+void	init_mendel_2(t_fractal *ftl, t_complex cmp, t_point p)
 {
-	ftl->i = 0;
-	ftl->tmp = 0;
-        ftl->c_r = (float)p.x / ftl->zoom_x + ftl->x1;
-        ftl->c_i = (float)p.y / ftl->zoom_y + ftl->y1;
-        ftl->z_r = 0;
-        ftl->z_i = 0;
+        cmp.c_r = (float)p.x / ftl->zoom_x + ftl->x1;
+        cmp.c_i = (float)p.y / ftl->zoom_y + ftl->y1;
+        cmp.z_r = 0;
+        cmp.z_i = 0;
 }
 
 void    init_julia(t_fractal *ftl)
@@ -84,17 +82,15 @@ void    init_julia(t_fractal *ftl)
         ftl->img_y = 800;
 	ftl->zoom_x = ftl->img_x / (ftl->x2 - ftl->x1);
 	ftl->zoom_y = ftl->img_y / (ftl->y2 - ftl->y1);
+	ftl->it_max = 150;
 }
 
-void    init_julia_2(t_fractal *ftl, t_point p)
+void    init_julia_2(t_fractal *ftl, t_complex cmp, t_point p)
 {
-	ftl->i = 0;
-	ftl->tmp = 0;
-        ftl->z_r = (float)p.x / ftl->zoom_x + ftl->x1;
-        ftl->z_i = (float)p.y / ftl->zoom_y + ftl->y1;
-        ftl->c_r = 0.285;
-        ftl->c_i = 0.01;
-        ftl->it_max = 150;
+        cmp.z_r = (float)p.x / ftl->zoom_x + ftl->x1;
+        cmp.z_i = (float)p.y / ftl->zoom_y + ftl->y1;
+        cmp.c_r = 0.285;
+        cmp.c_i = 0.01;
 }
 
 void    init_buddhabrot(t_fractal *ftl)
@@ -111,12 +107,10 @@ void    init_buddhabrot(t_fractal *ftl)
 	ftl->it_max = 100;
 }
 
-void    init_buddhabrot_2(t_fractal *ftl, t_point p)
+void    init_buddhabrot_2(t_fractal *ftl, t_complex cmp, t_point p)
 {
-        ftl->i = 0;
-        ftl->tmp = 0;
-        ftl->c_r = (float)p.x / ftl->zoom_x + ftl->x1;
-        ftl->c_i = (float)p.y / ftl->zoom_y + ftl->y1;
-        ftl->z_r = 0;
-        ftl->z_i = 0;
+        cmp.c_r = (float)p.x / ftl->zoom_x + ftl->x1;
+        cmp.c_i = (float)p.y / ftl->zoom_y + ftl->y1;
+        cmp.z_r = 0;
+        cmp.z_i = 0;
 }
