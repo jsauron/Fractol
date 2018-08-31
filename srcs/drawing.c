@@ -35,7 +35,6 @@ void	draw(t_env *e, t_fractal *ftl, t_img *image)
 void    calc_fractal(void *arguments)
 {
 	t_point		*p;
-	t_line		*l;
 	t_env		*e;
 	t_fractal	*ftl;
 	int		x;
@@ -45,19 +44,17 @@ void    calc_fractal(void *arguments)
 	t_complex	cmp;
 
 	i = 0;
-	printf("calc1\n");
 	e = ((t_arg *)arguments)->e;
-	printf("calci2\n");
         x = ((t_arg *)arguments)->x;
-	printf("calc3\n");
         y = ((t_arg *)arguments)->y;
-	printf("calc4\n");
         cmp = ((t_arg *)arguments)->cmp;
-	printf("calc5\n");
         ftl = ((t_arg *)arguments)->ftl;
+	printf("&e->m = %p\n", &e->m);
 	printf("x = %d\n", x);
-	l = &e->line[y];
 	printf("y = %d\n", y);
+	printf("&e = %p\n", &e);
+	printf("&e->line = %p\n", &e->line);
+	printf("&e->line[0].point = %p\n", &e->line[0].point);
 	p = &e->line[y].point[x];
 	printf("calc6\n");
 	calc_matrice(e, &e->m, p);

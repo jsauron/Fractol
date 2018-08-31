@@ -14,6 +14,7 @@ void	get_center(t_env *e)
 	e->center_x = (e->ftl.img_x) / 2;
 	e->center_y = (e->ftl.img_y) / 2;
 	printf("center x = %d\n", e->center_x);
+	printf("center y = %d\n", e->center_y);
 }
 
 /*void	change_color(t_env *e)

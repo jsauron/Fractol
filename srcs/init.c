@@ -46,6 +46,7 @@ void	init_matrice(t_env *e)
         e->m.z_a = 0;
         e->m.z_b = 0;
         e->m.z_c = 1;
+	printf("e->m = %p\n", &e->m); 
 }
 
 void	get_number(t_env *e, char **av)

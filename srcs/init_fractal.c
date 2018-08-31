@@ -9,11 +9,12 @@ void	init_point(t_env *e, t_fractal *ftl)
 	if (!(e->line = (t_line *)malloc(sizeof(t_line) * ftl->img_y)))
 		err_malloc();
 	y = 0;
+	printf(" &e->line = %p\n", &e->line);
 	while (y < ftl->img_y)
 	{
 		x = 0;
 		if (!(e->line[y].point = (t_point *)malloc(sizeof(t_point) * ftl->img_x)))
-			err_malloc();
+			err_malloc();	
 		while (x < ftl->img_x)
 		{
 			e->line[y].point[x].x = x;
@@ -22,6 +23,7 @@ void	init_point(t_env *e, t_fractal *ftl)
 		}
 		y++;
 	}
+	printf("&e->line[0].point = %p\n", &e->line[0].point);
 	if (!(e->arg = (t_arg *)malloc(sizeof(t_arg) * ftl->img_x * ftl->img_y)))
 		err_malloc();
 	y = 0;
