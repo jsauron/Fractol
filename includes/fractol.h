@@ -63,6 +63,7 @@
 # define ROT_Y 16
 # define ROT_Z 13
 # define CHANGE_F 36
+# define COLOR 257
 
 
 typedef	struct		s_matrice
@@ -160,6 +161,8 @@ typedef	struct		s_env
 	int		center_x;
 	t_threadpool	*pool;
 	t_arg		*arg;
+	int		color;
+	int		c;
 
 }			t_env;
 
@@ -273,7 +276,7 @@ int long	rgb(int r, int g, int b);
 void    get_number(t_env *e, char **av);
 void		get_center(t_env *e);
 void	change_color(t_env *e);
-void	get_color(t_env *e);
+int	get_color(t_env *e, int i);
 
 /*
 **      error.c

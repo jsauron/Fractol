@@ -9,10 +9,10 @@ void	draw(t_env *e, t_fractal *ftl, t_img *image)
 	while (i < 1)
 	{
 		calc_all_points(e, ftl);	
-		i++;
 		if (e->number == 3)
 			draw_buddha(e, ftl, image);
 		printf(" i = %d\n", i);
+		i++;
 	}
 	printf("DRAW\n");
 	mlx_put_image_to_window(e->mlx, e->win, image->img, 0, 0);
@@ -86,7 +86,7 @@ void    calc_fractal(void *arguments)
 	{
 		p->z = i * 255 / 50;
 		//draw_line(e, *p, x, y);
-		set_pixel_img(e, x, y, rgb(0, 0 , i * 255 / 50));
+		set_pixel_img(e, x, y, get_color(e, i));
 	}
 	if (i != ftl->it_max && e->number == 3)
 		add_pix_buddha(e, coord, x, y, i);

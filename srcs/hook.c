@@ -11,6 +11,8 @@ int		key(int key, t_env *e)
 		key_move(e, key);
 	if (key == ROT_X || key == ROT_Y || key == ROT_Z)
 		rot(e, key);
+	if (key == COLOR)
+		change_color(e);
 	printf("%d\n", key);
 	return (0);
 }
