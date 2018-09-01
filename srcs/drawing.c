@@ -80,7 +80,7 @@ void    calc_fractal(void *arguments)
 	{
 		//	printf("pix %d, %d \n", y , x);	
 		set_pixel_img(e, x, y, BLACK);
-		p->z = BLACK;
+		p->z = 0;
 	}
 	if (i != ftl->it_max && (e->number == 1 || e->number == 2))
 	{
@@ -89,5 +89,5 @@ void    calc_fractal(void *arguments)
 		set_pixel_img(e, x, y, rgb(0, 0 , i * 255 / 50));
 	}
 	if (i != ftl->it_max && e->number == 3)
-		add_pix_buddha(e , coord, x, y, i);
+		add_pix_buddha(e, coord, x, y, i);
 }
