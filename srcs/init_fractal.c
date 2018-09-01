@@ -52,7 +52,7 @@ void	init_arg(t_env *e, t_fractal *ftl)
 void    init_fractal(t_env *e)
 {
         if (e->number == 1)
-                init_mendel(&e->ftl);
+                init_mandel(&e->ftl);
         else if (e->number == 2)
                 init_julia(&e->ftl);
 	else if (e->number == 3)
@@ -62,7 +62,7 @@ void    init_fractal(t_env *e)
 void	init_fractal_2(t_env *e, t_fractal *ftl, t_complex *cmp, t_point *p)
 {
         if (e->number == 1)
-                init_mendel_2(ftl, cmp, *p);
+                init_mandel_2(ftl, cmp, *p);
         else if (e->number == 2)
                 init_julia_2(ftl, cmp, *p);
         else if (e->number == 3)

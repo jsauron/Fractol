@@ -215,8 +215,8 @@ void    init_julia_2(t_fractal *ftl, t_complex *cmp, t_point p);
 **      mandelbrot.c
 */
 
-void    init_mendel(t_fractal *ftl);
-void    init_mendel_2(t_fractal *ftl, t_complex *cmp, t_point p);
+void    init_mandel(t_fractal *ftl);
+void    init_mandel_2(t_fractal *ftl, t_complex *cmp, t_point p);
 
 /*
 **      buddha.c

@@ -1,6 +1,6 @@
 #include "../includes/fractol.h"
 
-void    init_mendel( t_fractal *ftl)
+void    init_mandel( t_fractal *ftl)
 {
         ftl->x1 = -2.1;
         ftl->x2 = 0.6;
@@ -13,7 +13,7 @@ void    init_mendel( t_fractal *ftl)
         ftl->it_max = 50;
 }
 
-void    init_mendel_2(t_fractal *ftl, t_complex *cmp, t_point p)
+void    init_mandel_2(t_fractal *ftl, t_complex *cmp, t_point p)
 {
         cmp->c_r = (float)p.x / ftl->zoom_x + ftl->x1;
         cmp->c_i = (float)p.y / ftl->zoom_y + ftl->y1;
