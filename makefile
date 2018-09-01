@@ -24,7 +24,10 @@
 	srcs/matrice.c \
 	srcs/draw_3D.c \
 	srcs/threadpool.c \
-	srcs/threadpool_helper.c
+	srcs/threadpool_helper.c\
+	srcs/buddha.c\
+	srcs/julia.c \
+	srcs/mandelbrot.c
 
 OBJS = $(SRC:.c=.o)
 

@@ -37,18 +37,13 @@ t_threadpool	*threadpool_create(int thread_count, int queue_size)
 	int		i;
 
 	i = 0;
-	printf("debut\n");
-	printf("queu size = %d\n", queue_size);
-	printf("max q = %d\n", MAX_QUEUE);
 	if (thread_count <= 0 || thread_count > MAX_THREADS ||
 		queue_size <= 0 || queue_size > MAX_QUEUE) 
 		return (NULL);
-	printf("kaka\n");
 	if (!(pool = (t_threadpool *)malloc(sizeof(t_threadpool))))
 		err_pool(pool);
 	if (init_pool(pool, queue_size, thread_count) == 0)
 		return (NULL);
-	printf("ici\n");
 	while (i < thread_count)
 	{
 		if (pthread_create(&(pool->threads[i]), NULL,
@@ -57,7 +52,6 @@ t_threadpool	*threadpool_create(int thread_count, int queue_size)
 			threadpool_destroy(pool, 0);
 			return NULL;
 		}
-		printf("la\n");
 		pool->thread_count++;
 		pool->started++;
 		i++;	

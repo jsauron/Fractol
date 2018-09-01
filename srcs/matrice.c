@@ -1,23 +1,5 @@
 #include "../includes/fractol.h"
 
-void	calc_all_points(t_env *e, t_fractal *ftl)
-{
-	int x;
-	int y;
-
-	y = 0;
-	while (y < ftl->img_y)
-	{
-		x = 0;
-		while (x < ftl->img_x)
-		{
-			threadpool_add(e->pool, calc_fractal, &e->arg[x + y *ftl->img_x]);
-			x++;
-		}
-		y++;
-	}
-}
-
 void		calc_matrice(t_env *e, t_matrice *m, t_point *p)
 {
 	double	new_x;

@@ -173,7 +173,6 @@ int	main(int ac, char **av);
 void	init(t_env *e);
 void	check_fractal(int ac, char **av, t_env *e);
 void	get_number(t_env *e, char **av);
-void	init_fractal(t_env *e);
 void	init_win(t_env *e);
 void	init_img(t_env *e);
 void	exit_win(t_env *e);
@@ -191,20 +190,41 @@ void	image_err(void);
 **	drawing.c
 */
 
+void    calc_all_points(t_env *e,t_fractal *ftl);
 void	draw(t_env *e, t_fractal *ftl, t_img *image);
 void	calc_fractal(void *arguments);
+void    calc_fractal_2(t_env *e, t_coord *coord, int x, int y);
 
 /*
 **      init_fractal.c
 */
 
 void	init_point(t_env *e, t_fractal *ftl);
-void    init_mendel(t_fractal *ftl);
-void    init_mendel_2(t_fractal *ftl, t_complex cmp, t_point p);
+void	init_arg(t_env *e, t_fractal *ftl);
+void	init_fractal(t_env *e);
+void    init_fractal_2(t_env *e, t_fractal *ftl, t_complex *cmp, t_point *p);
+
+/*
+**      julia.c
+*/
+
 void    init_julia(t_fractal *ftl);
-void    init_julia_2(t_fractal *ftl, t_complex cmp, t_point p);
-void	init_buddhabrot(t_fractal *ftl);
-void    init_buddhabrot_2(t_fractal *ftl, t_complex cmp, t_point p);
+void    init_julia_2(t_fractal *ftl, t_complex *cmp, t_point p);
+
+/*
+**      mandelbrot.c
+*/
+
+void    init_mendel(t_fractal *ftl);
+void    init_mendel_2(t_fractal *ftl, t_complex *cmp, t_point p);
+
+/*
+**      buddha.c
+*/
+void    init_buddhabrot(t_fractal *ftl);
+void    init_buddhabrot_2(t_fractal *ftl, t_complex *cmp, t_point p);
+void    draw_buddha(t_env *e, t_fractal *ftl, t_img *image);
+void    add_pix_buddha(t_env *e, t_coord *coord, int x, int y, int i);
 
 /*
 **	hook.c
@@ -239,14 +259,13 @@ void	get_color(t_env *e);
 **      matrice.c
 */
 
-void    calc_all_points(t_env *e,t_fractal *ftl);
 void    calc_matrice(t_env *e, t_matrice *m, t_point *p);
 void    rot_x(t_env *e);
 void    rot_y(t_env *e);
 void    rot_z(t_env *e);
 
 /*
-**      draw_3D.c
+*      draw_3D.c
 */
 
 void    bresenham_tab(int *tab, t_point p1, t_point p2);
