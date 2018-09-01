@@ -27,7 +27,8 @@
 	srcs/threadpool_helper.c\
 	srcs/buddha.c\
 	srcs/julia.c \
-	srcs/mandelbrot.c
+	srcs/mandelbrot.c\
+	srcs/event.c
 
 OBJS = $(SRC:.c=.o)
 

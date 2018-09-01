@@ -164,7 +164,6 @@ typedef	struct		s_env
 }			t_env;
 
 
-int	main(int ac, char **av);
 
 /*
 **	init.c
@@ -172,28 +171,9 @@ int	main(int ac, char **av);
 
 void	init(t_env *e);
 void	check_fractal(int ac, char **av, t_env *e);
-void	get_number(t_env *e, char **av);
 void	init_win(t_env *e);
 void	init_img(t_env *e);
-void	exit_win(t_env *e);
 void	init_matrice(t_env *e);
-
-/*
-**	error.c
-*/
-
-void	err_malloc(void);
-void	arg_invalid(void);
-void	image_err(void);
-
-/*
-**	drawing.c
-*/
-
-void    calc_all_points(t_env *e,t_fractal *ftl);
-void	draw(t_env *e, t_fractal *ftl, t_img *image);
-void	calc_fractal(void *arguments);
-void    calc_fractal_2(t_env *e, t_coord *coord, int x, int y);
 
 /*
 **      init_fractal.c
@@ -203,6 +183,13 @@ void	init_point(t_env *e, t_fractal *ftl);
 void	init_arg(t_env *e, t_fractal *ftl);
 void	init_fractal(t_env *e);
 void    init_fractal_2(t_env *e, t_fractal *ftl, t_complex *cmp, t_point *p);
+
+/*
+**      image.c
+*/
+
+void    set_pixel_img(t_env *e, int x, int y, int color);
+void    clear_img(t_env *e);
 
 /*
 **      julia.c
@@ -226,6 +213,33 @@ void    init_buddhabrot_2(t_fractal *ftl, t_complex *cmp, t_point p);
 void    draw_buddha(t_env *e, t_fractal *ftl, t_img *image);
 void    add_pix_buddha(t_env *e, t_coord *coord, int x, int y, int i);
 
+
+/*
+**      drawing.c
+*/
+
+void    calc_all_points(t_env *e,t_fractal *ftl);
+void    draw(t_env *e, t_fractal *ftl, t_img *image);
+void    calc_fractal(void *arguments);
+void    calc_fractal_2(t_env *e, t_coord *coord, int x, int y);
+
+/*
+**      draw_3D.c
+*/
+
+void    bresenham_tab(int *tab, t_point p1, t_point p2);
+void    draw_pixel(t_env *e, t_point p1, t_point p2, int color);
+void    draw_line(t_env *e, t_point p1, int x, int y);
+
+/*
+**      matrice.c
+*/
+
+void    calc_matrice(t_env *e, t_matrice *m, t_point *p);
+void    rot_x(t_env *e);
+void    rot_y(t_env *e);
+void    rot_z(t_env *e);
+
 /*
 **	hook.c
 */
@@ -234,11 +248,16 @@ int	key(int key, t_env *e);
 int	motion_notify(int x, int y, t_env *e);
 int	button_press(int key, int x, int y, t_env *e);
 int	destroy_notify(t_env *e);
-void	zoom(t_env *e, int x, int y, float zoom);
-void	move(t_env *e, t_fractal *ftl, float move_x, float move_y);
-void	key_move(t_env *e, int key);
-void	change_fractal(t_env *e);
-void	rot(t_env *e, int key);
+void	exit_win(t_env *e);
+
+/*
+**      event.c
+*/
+void    key_move(t_env *e, int key);
+void    move(t_env *e, t_fractal *ftl, float move_x, float move_y);
+void    rot(t_env *e, int key);
+void    zoom(t_env *e, int x, int y, float zoom);
+void    change_fractal(t_env *e);
 
 /*
 **	image.c
@@ -251,24 +270,17 @@ void	clear_img(t_env *e);
 */
 
 int long	rgb(int r, int g, int b);
+void    get_number(t_env *e, char **av);
 void		get_center(t_env *e);
 void	change_color(t_env *e);
 void	get_color(t_env *e);
 
 /*
-**      matrice.c
+**      error.c
 */
 
-void    calc_matrice(t_env *e, t_matrice *m, t_point *p);
-void    rot_x(t_env *e);
-void    rot_y(t_env *e);
-void    rot_z(t_env *e);
+void    err_malloc(void);
+void    arg_invalid(void);
+void    image_err(void);
 
-/*
-*      draw_3D.c
-*/
-
-void    bresenham_tab(int *tab, t_point p1, t_point p2);
-void    draw_pixel(t_env *e, t_point p1, t_point p2, int color);
-void    draw_line(t_env *e, t_point p1, int x, int y);
 #endif

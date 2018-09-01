@@ -48,16 +48,6 @@ void	init_matrice(t_env *e)
         e->m.z_c = 1;
 }
 
-void	get_number(t_env *e, char **av)
-{
-	if (ft_strcmp(av[1], "mandelbrot") == 0)
-		e->number = 1;	
-	if (ft_strcmp(av[1], "julia") == 0)
-		e->number = 2;
-	if (ft_strcmp(av[1], "buddha") == 0)
-		e->number = 3;
-}
-
 void	init_win(t_env *e)
 {
 	e->mlx = mlx_init();
@@ -69,10 +59,4 @@ void	init_img(t_env *e)
 	e->image.img = mlx_new_image(e->mlx, e->ftl.img_x, e->ftl.img_y);
 	e->image.data = (int *)mlx_get_data_addr(e->image.img,
 			&e->image.bpp, &e->image.size_l, &e->image.endian);
-}
-
-void	exit_win(t_env *e)
-{
-	mlx_destroy_window(e->mlx, e->win);
-	exit(1);
 }

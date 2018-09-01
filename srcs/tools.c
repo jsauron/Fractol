@@ -17,6 +17,16 @@ void	get_center(t_env *e)
 	printf("center y = %d\n", e->center_y);
 }
 
+void    get_number(t_env *e, char **av)
+{
+        if (ft_strcmp(av[1], "mandelbrot") == 0)
+                e->number = 1;
+        if (ft_strcmp(av[1], "julia") == 0)
+                e->number = 2;
+        if (ft_strcmp(av[1], "buddha") == 0)
+                e->number = 3;
+}
+
 /*void	change_color(t_env *e)
 {
 	get_color(e);
