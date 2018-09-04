@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   drawing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/04 15:27:11 by jsauron           #+#    #+#             */
+/*   Updated: 2018/09/04 15:57:51 by jsauron          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/fractol.h"
 
 void	draw(t_env *e, t_fractal *ftl, t_img *image)
 {
-	volatile _Atomic int atom;
+	volatile _Atomic int	atom;
 
 	atom = 0;
 	e->atom = atom;
@@ -11,35 +22,38 @@ void	draw(t_env *e, t_fractal *ftl, t_img *image)
 	while (e->atom != ftl->img_x * ftl->img_y)
 	{}
 	if (e->number == 3)
-                draw_buddha(e, ftl, image);
+		draw_buddha(e, ftl, image);
 	mlx_put_image_to_window(e->mlx, e->win, image->img, 0, 0);
 }
 
 void	calc_all_points(t_env *e, t_fractal *ftl)
 {
-	int x;
-	int y;
+	int		x;
+	int		y;
+	int		g;
 
+	g = 0;
 	y = 0;
 	while (y < ftl->img_y)
 	{
 		x = 0;
 		while (x < ftl->img_x)
 		{
-			threadpool_add(e->pool, calc_fractal, &e->arg[x + y *ftl->img_x]);
+			g = threadpool_add(e->pool, calc_fractal, &e->arg[x + y *ftl->img_x]);
 			x++;
 		}
 		y++;
+		//printf("g = %d\n", g);
 	}
 }
 
-void    calc_fractal(void *arguments)
+void	calc_fractal(void *arguments)
 {
 	t_point		*p;
 	t_env		*e;
 	t_fractal	*ftl;
-	int		x;
-	int		y;
+	int			x;
+	int			y;
 	int 		i;
 	double		tmp;
 	t_complex	cmp;
@@ -52,11 +66,11 @@ void    calc_fractal(void *arguments)
 	ftl = ((t_arg *)arguments)->ftl;
 	p = &e->line[y].point[x];
 	calc_matrice(e, &e->m, p);
-	t_coord         coord[ftl->it_max];
+	t_coord		coord[ftl->it_max];
 	init_fractal_2(e, ftl, &cmp, p);
 	while (((pow(cmp.z_r, 2) + pow(cmp.z_i, 2)) < 4) &&
 			i < ftl->it_max)
-	{	
+	{
 		tmp = cmp.z_r;
 		cmp.z_r = (pow(cmp.z_r, 2)) - (pow(cmp.z_i, 2)) + cmp.c_r;
 		cmp.z_i = 2 * cmp.z_i * tmp + cmp.c_i;

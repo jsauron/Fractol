@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   matrice.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/04 15:41:11 by jsauron           #+#    #+#             */
+/*   Updated: 2018/09/04 15:41:28 by jsauron          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/fractol.h"
 
-void		calc_matrice(t_env *e, t_matrice *m, t_point *p)
+void	calc_matrice(t_env *e, t_matrice *m, t_point *p)
 {
 	double	new_x;
 	double	new_y;
 	double	new_z;
-	
+
 	p->x -= e->center_x;
-	p->y -= e->center_y;	
+	p->y -= e->center_y;
 	new_x = (p->x * m->x_a) + (p->y * m->x_b) + (p->z * m->x_c);
 	new_y = (p->x * m->y_a) + (p->y * m->y_b) + (p->z * m->y_c);
 	new_z = (p->x * m->z_a) + (p->y * m->z_b) + (p->z * m->z_c);

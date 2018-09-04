@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/05 02:36:29 by jsauron           #+#    #+#             */
-/*   Updated: 2018/08/11 19:00:20 by jsauron          ###   ########.fr       */
+/*   Updated: 2018/09/04 15:35:03 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,36 +17,36 @@ void	check_fractal(int ac, char **av, t_env *e)
 	if (ac != 2)
 		arg_invalid();
 	if (ft_strcmp(av[1], "julia") == 0 || ft_strcmp(av[1], "mandelbrot") == 0
-	|| ft_strcmp(av[1], "buddha") == 0)
+			|| ft_strcmp(av[1], "buddha") == 0)
 	{
 		e->name = av[1];
 		get_number(e, av);
 		init_matrice(e);
 		e->c = 0;
 	}
-	else 
-		arg_invalid(); 
+	else
+		arg_invalid();
 }
 
 void	init(t_env *e)
 {
 	init_fractal(e);
-        init_win(e);
-        init_img(e);
-        init_point(e, &e->ftl);
+	init_win(e);
+	init_img(e);
+	init_point(e, &e->ftl);
 }
 
 void	init_matrice(t_env *e)
 {
 	e->m.x_a = 1;
-        e->m.x_b = 0;
-        e->m.x_c = 0;
-        e->m.y_a = 0;
-        e->m.y_b = 1;
-        e->m.y_c = 0;
-        e->m.z_a = 0;
-        e->m.z_b = 0;
-        e->m.z_c = 1;
+	e->m.x_b = 0;
+	e->m.x_c = 0;
+	e->m.y_a = 0;
+	e->m.y_b = 1;
+	e->m.y_c = 0;
+	e->m.z_a = 0;
+	e->m.z_b = 0;
+	e->m.z_c = 1;
 }
 
 void	init_win(t_env *e)

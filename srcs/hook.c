@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hook.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/04 15:31:34 by jsauron           #+#    #+#             */
+/*   Updated: 2018/09/04 15:32:28 by jsauron          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/fractol.h"
 
 int		key(int key, t_env *e)
@@ -7,7 +19,7 @@ int		key(int key, t_env *e)
 	if (key == CHANGE_F)
 		change_fractal(e);
 	if (key == MOVE_UP || key == MOVE_DOWN ||
-		key == MOVE_RIGHT || key == MOVE_LEFT)
+			key == MOVE_RIGHT || key == MOVE_LEFT)
 		key_move(e, key);
 	if (key == ROT_X || key == ROT_Y || key == ROT_Z)
 		rot(e, key);
@@ -37,14 +49,14 @@ int		button_press(int key, int x, int y, t_env *e)
 	return (0);
 }
 
-int	destroy_notify(t_env *e)
+int		destroy_notify(t_env *e)
 {
 	exit_win(e);
 	return (0);
 }
 
-void    exit_win(t_env *e)
+void	exit_win(t_env *e)
 {
-        mlx_destroy_window(e->mlx, e->win);
-        exit(1);
+	mlx_destroy_window(e->mlx, e->win);
+	exit(1);
 }
