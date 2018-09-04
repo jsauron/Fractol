@@ -6,7 +6,7 @@
 #    By: jsauron <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/29 23:58:29 by jsauron           #+#    #+#              #
-#    Updated: 2018/08/11 21:35:47 by jsauron          ###   ########.fr        #
+#    Updated: 2018/09/04 21:11:26 by jsauron          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
  NAME = fractol
@@ -43,14 +43,14 @@ DONE = "\033[35m Fractol ready\033[0m"
 all: lib $(NAME)
 
 $(NAME):$(OBJS)
-	@gcc  -fsanitize=address -Wall -Wextra -Werror -o $(NAME) libft/libft.a $(OBJS) -I $(INCLUDES) $(MLX) $(PTHREAD)
+	@gcc  -O3  -Wall -Wextra -Werror -o $(NAME) libft/libft.a $(OBJS) -I $(INCLUDES) $(MLX) $(PTHREAD)
 	@echo $(DONE)
 
 lib:
 	@make -j -C libft/ libft.a
 
 %.o: %.c $(INCLUDES)fractol.h
-	@gcc -fsanitize=address -Wall -Wextra -Werror -o $@ -c $<
+	@gcc -O3 -Wall -Wextra -Werror -o $@ -c $<
 
 clean:
 	@rm -f $(OBJS) && make -C libft/ clean

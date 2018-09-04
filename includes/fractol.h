@@ -147,6 +147,8 @@ typedef	struct		s_arg
 
 }			t_arg;
 
+typedef volatile _Atomic int t_atom;
+
 typedef	struct		s_env
 {
 	void		*mlx;
@@ -163,7 +165,7 @@ typedef	struct		s_env
 	t_arg		*arg;
 	int		color;
 	int		c;
-	volatile _Atomic int atom;
+	t_atom	 atom;
 
 }			t_env;
 

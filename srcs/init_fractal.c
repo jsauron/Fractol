@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/04 15:35:15 by jsauron           #+#    #+#             */
-/*   Updated: 2018/09/04 15:36:42 by jsauron          ###   ########.fr       */
+/*   Updated: 2018/09/04 21:15:09 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,24 +39,16 @@ void	init_point(t_env *e, t_fractal *ftl)
 
 void	init_arg(t_env *e, t_fractal *ftl)
 {
-	int x;
 	int y;
 
-	if (!(e->arg = (t_arg *)malloc(sizeof(t_arg) * ftl->img_x * ftl->img_y)))
+	if (!(e->arg = (t_arg *)malloc(sizeof(t_arg) * ftl->img_y)))
 		err_malloc();
 	y = 0;
 	while (y < ftl->img_y)
 	{
-		x = 0;
-		while (x < ftl->img_x)
-		{
-			e->arg[x + y * ftl->img_x].e = e;
-			e->arg[x + y * ftl->img_x].ftl = &e->ftl;
-			e->arg[x + y * ftl->img_x].x = x;
-			e->arg[x + y * ftl->img_x].y = y;
-			//printf("pix %d, %d \n", y , x);
-			x++;
-		}
+			e->arg[y].e = e;
+			e->arg[y].ftl = &e->ftl;
+			e->arg[y].y = y;
 		y++;
 	}
 }
