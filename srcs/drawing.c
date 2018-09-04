@@ -3,18 +3,15 @@
 
 void	draw(t_env *e, t_fractal *ftl, t_img *image)
 {
-	int		i;
+	volatile _Atomic int atom;
 
-	i = 0;
-	while (i < 1)
-	{
-		calc_all_points(e, ftl);	
-		if (e->number == 3)
-			draw_buddha(e, ftl, image);
-		printf(" i = %d\n", i);
-		i++;
-	}
-	printf("DRAW\n");
+	atom = 0;
+	e->atom = atom;
+	calc_all_points(e, ftl);
+	while (e->atom != ftl->img_x * ftl->img_y)
+	{}
+	if (e->number == 3)
+                draw_buddha(e, ftl, image);
 	mlx_put_image_to_window(e->mlx, e->win, image->img, 0, 0);
 }
 
@@ -31,10 +28,8 @@ void	calc_all_points(t_env *e, t_fractal *ftl)
 		{
 			threadpool_add(e->pool, calc_fractal, &e->arg[x + y *ftl->img_x]);
 			x++;
-		printf("x = %d\n", x);
 		}
 		y++;
-		printf("y = %d\n", y);
 	}
 }
 
@@ -54,7 +49,6 @@ void    calc_fractal(void *arguments)
 	e = ((t_arg *)arguments)->e;
 	x = ((t_arg *)arguments)->x;
 	y = ((t_arg *)arguments)->y;
-	cmp = ((t_arg *)arguments)->cmp;
 	ftl = ((t_arg *)arguments)->ftl;
 	p = &e->line[y].point[x];
 	calc_matrice(e, &e->m, p);
@@ -85,9 +79,10 @@ void    calc_fractal(void *arguments)
 	if (i != ftl->it_max && (e->number == 1 || e->number == 2))
 	{
 		p->z = i * 255 / 50;
-		//draw_line(e, *p, x, y);
+	//	draw_line(e, *p, x, y);
 		set_pixel_img(e, x, y, get_color(e, i));
 	}
 	if (i != ftl->it_max && e->number == 3)
 		add_pix_buddha(e, coord, x, y, i);
+	e->atom++;
 }

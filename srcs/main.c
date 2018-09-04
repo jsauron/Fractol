@@ -18,7 +18,7 @@ int		main(int ac, char **av)
 	check_fractal(ac, av, &e);
 	init(&e);
 	printf(" threadpool = %d\n", e.ftl.img_x * e.ftl.img_y );
-	e.pool = threadpool_create( 1 , e.ftl.img_x * e.ftl.img_y);
+	e.pool = threadpool_create( 2 , e.ftl.img_x * e.ftl.img_y);
 	printf("pool = %d\n", (int)e.pool);
 	get_center(&e);
 	draw(&e, &e.ftl, &e.image);

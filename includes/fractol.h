@@ -163,6 +163,7 @@ typedef	struct		s_env
 	t_arg		*arg;
 	int		color;
 	int		c;
+	volatile _Atomic int atom;
 
 }			t_env;
 

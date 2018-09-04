@@ -69,7 +69,6 @@ int	threadpool_add(t_threadpool *pool, void (*function)(void *), void *argument)
 	if (pthread_mutex_lock(&(pool->lock)))
 		return (threadpool_lock_failure);
 	next = (pool->tail + 1) % pool->queue_size;
-
 	if (pool->count == pool->queue_size) 
 		err = threadpool_queue_full;
 	else if (pool->shutdown)
