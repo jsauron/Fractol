@@ -121,7 +121,8 @@ typedef struct           s_fractal
 	int		img_y;
 	int		zoom_x;
 	int		zoom_y;
-	
+	int		mouse_x;
+	int		mouse_y;
 }                       t_fractal;
 
 typedef struct  s_img

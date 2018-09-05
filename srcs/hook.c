@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/04 15:31:34 by jsauron           #+#    #+#             */
-/*   Updated: 2018/09/04 15:32:28 by jsauron          ###   ########.fr       */
+/*   Updated: 2018/09/05 19:45:55 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ int		key(int key, t_env *e)
 
 int		motion_notify(int x, int y, t_env *e)
 {
-	(void)x;
-	(void)y;
-	(void)e;
+	e->ftl.mouse_x = x;
+	e->ftl.mouse_y = y;
+	clear_img(e);
+	draw(e, &e->ftl, &e->image);
 	return (0);
 }
 
