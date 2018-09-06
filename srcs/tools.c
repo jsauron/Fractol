@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/04 15:53:45 by jsauron           #+#    #+#             */
-/*   Updated: 2018/09/04 15:55:56 by jsauron          ###   ########.fr       */
+/*   Updated: 2018/09/06 17:14:33 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,42 @@ int			get_color(t_env *e, int i)
 	if (e->c == 0)
 		color = rgb(i * 255 / 8, 0, 0);
 	else if (e->c == 1)
-		color = rgb(0, 0, i * 255 / 4);
+		color = unicorn_color(e, i);
 	else if (e->c == 2)
-		color = rgb(i * 255 / 50, 0, 0);
+		color = rgb(0, 0, i * 255 / 4);
 	else if (e->c == 3)
-		color = rgb(0, i * 255 / 50, 0);
+		color = rgb(i * 255 / 50, 0, 0);
 	else if (e->c == 4)
-		color = rgb(0, 0, i * 255 / 50);
+		color = rgb(0, i * 255 / 50, 0);
 	else if (e->c == 5)
+		color = rgb(0, 0, i * 255 / 50);
+	else if (e->c == 6)
 		color = rgb(0, i * 255 / 8, 0);
 	return (color);
+}
+
+int		unicorn_color(t_env *e, int i)
+{
+	int			index;
+	static int	c;
+	const int	color[8] = {
+		BLUE,
+		PINK,
+		CYAN,
+		WHITE,
+		YELLOW,
+		PINK,
+		CYAN,
+		WHITE,
+	};
+
+	c++;;
+	c = (c > 7) ? 0 : c;
+	//if (p.color >= 0)
+		index =  (i * 255/50) * 7 / e->ftl.it_max ;
+	//else
+	//	index = c + p.color * 7 / map->z_min;
+	if (index > 7)
+		index -= 8;
+	return (color[index]);
 }

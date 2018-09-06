@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/04 15:29:46 by jsauron           #+#    #+#             */
-/*   Updated: 2018/09/04 15:31:23 by jsauron          ###   ########.fr       */
+/*   Updated: 2018/09/06 17:27:04 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,24 @@ void	zoom(t_env *e, int x, int y, float zoom)
 	double	tmp_x;
 	double	tmp_y;
 
-	tmp_x = (((e->ftl.x2 - e->ftl.x1) *
-				(double)x / e->ftl.img_x) + e->ftl.x1);
-	tmp_y = (((e->ftl.y2 - e->ftl.y1) *
-				(double)y / e->ftl.img_y) + e->ftl.y1);
-	e->ftl.x1 = tmp_x - (tmp_x - e->ftl.x1) * zoom;
-	e->ftl.x2 = tmp_x + (e->ftl.x2 - tmp_x) * zoom;
-	e->ftl.y1 = tmp_y - (tmp_y - e->ftl.y1) * zoom;
-	e->ftl.y2 = tmp_y + (e->ftl.y2 - tmp_y) * zoom;
-	e->ftl.it_max /= zoom;
-	e->ftl.zoom_x = e->ftl.img_x / (e->ftl.x2 - e->ftl.x1);
-	e->ftl.zoom_y = e->ftl.img_y / (e->ftl.y2 - e->ftl.y1);
-	init_matrice(e);
-	clear_img(e);
-	draw(e, &e->ftl, &e->image);
+	if (e->ftl.it_max >= 5)
+	{
+		tmp_x = (((e->ftl.x2 - e->ftl.x1) *
+					(double)x / e->ftl.img_x) + e->ftl.x1);
+		tmp_y = (((e->ftl.y2 - e->ftl.y1) *
+					(double)y / e->ftl.img_y) + e->ftl.y1);
+		e->ftl.x1 = tmp_x - (tmp_x - e->ftl.x1) * zoom;
+		e->ftl.x2 = tmp_x + (e->ftl.x2 - tmp_x) * zoom;
+		e->ftl.y1 = tmp_y - (tmp_y - e->ftl.y1) * zoom;
+		e->ftl.y2 = tmp_y + (e->ftl.y2 - tmp_y) * zoom;
+		e->ftl.it_max /= zoom;
+		printf( "itmax = %d\n", e->ftl.it_max);
+		e->ftl.zoom_x = e->ftl.img_x / (e->ftl.x2 - e->ftl.x1);
+		e->ftl.zoom_y = e->ftl.img_y / (e->ftl.y2 - e->ftl.y1);
+		init_matrice(e);
+		clear_img(e);
+		draw(e, &e->ftl, &e->image);
+	}
 }
 
 void	change_fractal(t_env *e)

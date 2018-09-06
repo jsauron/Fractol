@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/04 15:31:34 by jsauron           #+#    #+#             */
-/*   Updated: 2018/09/05 19:45:55 by jsauron          ###   ########.fr       */
+/*   Updated: 2018/09/06 16:32:46 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ int		key(int key, t_env *e)
 	if (key == MOVE_UP || key == MOVE_DOWN ||
 			key == MOVE_RIGHT || key == MOVE_LEFT)
 		key_move(e, key);
+	if (key == ZOOM_PLUS)
+		zoom(e, e->center_x, e->center_y, 0.95);
+	if (key == ZOOM_LESS)
+		zoom(e, e->center_x, e->center_y, 1.05);
 	if (key == ROT_X || key == ROT_Y || key == ROT_Z)
 		rot(e, key);
 	if (key == COLOR)
@@ -40,12 +44,8 @@ int		motion_notify(int x, int y, t_env *e)
 
 int		button_press(int key, int x, int y, t_env *e)
 {
-	if (key == CLIK || key == ZOOM_PLUS)
+	if (key == CLIK)
 		zoom(e, x, y, 0.95);
-	if (key == ZOOM_LESS)
-		zoom(e, x, y, 1.05);
-	if (key == ROT_X || key == ROT_Y)
-		rot(e, key);
 	printf(" %d\n", key);
 	return (0);
 }
