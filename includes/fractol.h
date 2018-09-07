@@ -53,18 +53,22 @@
 # define ESC 53
 # define COLOR 257
 # define CLIK 1
-# define ZOOM_PLUS 69
-# define ZOOM_LESS 78
+# define ZOOM_PLUS 44
+# define ZOOM_LESS 24
+# define PAD_PLUS 4
+#define PAD_LESS 5
 # define MOVE_UP 126
 # define MOVE_DOWN 125
 # define MOVE_RIGHT 124
 # define MOVE_LEFT 123
 # define ROT_X 7
 # define ROT_Y 16
-# define ROT_Z 6
+# define ROT_Z 13
 # define CHANGE_F 36
 # define COLOR 257
-
+# define INIT_MAT 49
+# define RESET 15
+# define MORE_HEAD 4
 
 typedef	struct		s_matrice
 {
@@ -197,10 +201,12 @@ void    init_fractal_2(t_env *e, t_fractal *ftl, t_complex *cmp, t_point *p);
 
 void    set_pixel_img(t_env *e, int x, int y, int color);
 void    clear_img(t_env *e);
+void    put_info_in_window(t_env *e);
 
 /*
 **      julia.c
 */
+
 
 void    init_julia(t_fractal *ftl);
 void    init_julia_2(t_fractal *ftl, t_complex *cmp, t_point p);
@@ -265,7 +271,9 @@ void    move(t_env *e, t_fractal *ftl, float move_x, float move_y);
 void    rot(t_env *e, int key);
 void    zoom(t_env *e, int x, int y, float zoom);
 void    change_fractal(t_env *e);
-
+void	stop_moving(t_env *e);
+void	reset(t_env *e);
+void	add_head(t_env *e);
 /*
 **	image.c
 */
@@ -281,6 +289,7 @@ void    get_number(t_env *e, char **av);
 void		get_center(t_env *e);
 void	change_color(t_env *e);
 int	get_color(t_env *e, int i);
+int	unicorn_color(t_env *e, int i);
 
 /*
 **      error.c

@@ -52,8 +52,6 @@ void	zoom(t_env *e, int x, int y, float zoom)
 	double	tmp_x;
 	double	tmp_y;
 
-	if (e->ftl.it_max >= 5)
-	{
 		tmp_x = (((e->ftl.x2 - e->ftl.x1) *
 					(double)x / e->ftl.img_x) + e->ftl.x1);
 		tmp_y = (((e->ftl.y2 - e->ftl.y1) *
@@ -63,13 +61,11 @@ void	zoom(t_env *e, int x, int y, float zoom)
 		e->ftl.y1 = tmp_y - (tmp_y - e->ftl.y1) * zoom;
 		e->ftl.y2 = tmp_y + (e->ftl.y2 - tmp_y) * zoom;
 		e->ftl.it_max /= zoom;
-		printf( "itmax = %d\n", e->ftl.it_max);
 		e->ftl.zoom_x = e->ftl.img_x / (e->ftl.x2 - e->ftl.x1);
 		e->ftl.zoom_y = e->ftl.img_y / (e->ftl.y2 - e->ftl.y1);
 		init_matrice(e);
 		clear_img(e);
 		draw(e, &e->ftl, &e->image);
-	}
 }
 
 void	change_fractal(t_env *e)
@@ -84,4 +80,27 @@ void	change_fractal(t_env *e)
 	init_img(e);
 	init_point(e, &e->ftl);
 	draw(e, &e->ftl, &e->image);
+}
+
+void	reset(t_env *e)
+{
+	printf("reset\n");
+	clear_img(e);
+	init_fractal(e);
+	free(e->line);
+	init_point(e, &e->ftl);
+	init_matrice(e);
+	draw(e, &e->ftl, &e->image);
+}
+
+void	stop_moving(t_env *e)
+{
+	clear_img(e);
+	init_matrice(e);
+	draw(e, &e->ftl, &e->image);	
+}
+
+void	add_head(t_env *e)
+{
+	(void)e;
 }

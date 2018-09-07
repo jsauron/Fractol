@@ -21,6 +21,7 @@ void	draw(t_env *e, t_fractal *ftl, t_img *image)
 	if (e->number == 3)
 		draw_buddha(e, ftl, image);
 	mlx_put_image_to_window(e->mlx, e->win, image->img, 0, 0);
+	put_info_in_window(e);
 }
 
 void	calc_all_points(t_env *e, t_fractal *ftl)
@@ -61,12 +62,12 @@ void	calc_fractal(void *arguments)
 	calc_matrice(e, &e->m, p);
 	t_coord		coord[ftl->it_max];
 	init_fractal_2(e, ftl, &cmp, p);
-		tmp_r = cmp.z_r * cmp.z_r ;
+		tmp_r = cmp.z_r * cmp.z_r;
 		tmp_z = cmp.z_i * cmp.z_i;
 		while (tmp_r + tmp_z < 4  && i < ftl->it_max)
 		{
 			tmp = cmp.z_r;
-			cmp.z_r = tmp_r - tmp_z + cmp.c_r;
+			cmp.z_r = tmp_r - tmp_z + cmp.c_r ;
 			cmp.z_i = 2 * cmp.z_i * tmp + cmp.c_i;
 			tmp_r = cmp.z_r * cmp.z_r;
 			tmp_z = cmp.z_i * cmp.z_i;

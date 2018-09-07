@@ -29,6 +29,10 @@ int		key(int key, t_env *e)
 		rot(e, key);
 	if (key == COLOR)
 		change_color(e);
+	if (key == INIT_MAT)
+		stop_moving(e);
+	if (key == RESET)
+		reset(e); 
 	printf("%d\n", key);
 	return (0);
 }
@@ -44,8 +48,10 @@ int		motion_notify(int x, int y, t_env *e)
 
 int		button_press(int key, int x, int y, t_env *e)
 {
-	if (key == CLIK)
+	if (key == CLIK || key == PAD_PLUS)
 		zoom(e, x, y, 0.95);
+	if (key == PAD_LESS)
+		zoom(e, x ,y, 1.05);
 	printf(" %d\n", key);
 	return (0);
 }
