@@ -22,7 +22,7 @@ void	init_buddhabrot(t_fractal *ftl)
 	ftl->img_y = 750;
 	ftl->zoom_x = ftl->img_x / (ftl->x2 - ftl->x1);
 	ftl->zoom_y = ftl->img_y / (ftl->y2 - ftl->y1);
-	ftl->it_max = 100;
+	ftl->it_max = 1000;
 }
 
 void	init_buddhabrot_2(t_fractal *ftl, t_complex *cmp, t_point p)
@@ -45,7 +45,7 @@ void	draw_buddha(t_env *e, t_fractal *ftl, t_img *image)
 		while (x < ftl->img_x)
 		{
 			set_pixel_img(e, x, y,
-					rgb(0, image->data[x + y * ftl->img_x] * 255 / 15, 0));
+					 buddha_color(e, (image->data[x + y * ftl->img_x] )));
 			x++;
 		}
 		y++;

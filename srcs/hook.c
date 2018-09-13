@@ -32,7 +32,9 @@ int		key(int key, t_env *e)
 	if (key == INIT_MAT)
 		stop_moving(e);
 	if (key == RESET)
-		reset(e); 
+		reset(e);
+	if (key == HELP)
+		help(e); 
 	printf("%d\n", key);
 	return (0);
 }

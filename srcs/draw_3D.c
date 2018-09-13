@@ -51,13 +51,13 @@ void	draw_line(t_env *e, t_point p1, int x, int y)
 
 	if (x + 1 < e->ftl.img_x)
 	{
-		p2 = (e->line[y].point[x + 1]);
+		p2 = (e->point[(x + 1) + y * e->ftl.img_x]);
 		draw_pixel(e, p1, p2,
 			rgb(0, 0 , 255));
 	}
 	if (y + 1 < e->ftl.img_y && x < e->ftl.img_x)
 	{
-		p3 = (e->line[y + 1].point[x]);
+		p3 = (e->point[x + (y + 1) * e->ftl.img_x]);
 		draw_pixel(e, p1, p3,
 			rgb(0, 0 , 255));
 	}

@@ -68,7 +68,7 @@
 # define COLOR 257
 # define INIT_MAT 49
 # define RESET 15
-# define MORE_HEAD 4
+# define HELP 4
 
 typedef	struct		s_matrice
 {
@@ -99,11 +99,11 @@ typedef struct		s_point
 
 }			t_point;
 
-typedef struct		s_line
-{
-	t_point		*point;
-
-}			t_line;
+//typedef struct		s_line
+//{
+//	t_point		*point;
+//
+//}			t_line;
 
 typedef struct		s_complex
 {
@@ -163,7 +163,8 @@ typedef	struct		s_env
 	int		number;
 	t_img		image;
 	t_matrice	m;
-	t_line		*line;
+//	t_line		*line;
+	t_point		*point;
 	int		center_y;
 	int		center_x;
 	t_threadpool	*pool;
@@ -289,7 +290,11 @@ void    get_number(t_env *e, char **av);
 void		get_center(t_env *e);
 void	change_color(t_env *e);
 int	get_color(t_env *e, int i);
+int	palette_1(t_env *e, int i);
+int 	palette_2(t_env *e, int i);
+int	buddha_color(t_env *e, int i);
 int	unicorn_color(t_env *e, int i);
+void	help(t_env *e);
 
 /*
 **      error.c

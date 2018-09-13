@@ -17,19 +17,17 @@ void	init_point(t_env *e, t_fractal *ftl)
 	int x;
 	int y;
 
-	if (!(e->line = (t_line *)malloc(sizeof(t_line) * ftl->img_y)))
-		err_malloc();
+	if (!(e->point = 
+		(t_point *)malloc(sizeof(t_point) * ftl->img_x * ftl->img_y)))
+			err_malloc();
 	y = 0;
 	while (y < ftl->img_y)
 	{
 		x = 0;
-		if (!(e->line[y].point =
-					(t_point *)malloc(sizeof(t_point) * ftl->img_x)))
-			err_malloc();
 		while (x < ftl->img_x)
 		{
-			e->line[y].point[x].x = x;
-			e->line[y].point[x].y = y;
+			e->point[x + y * ftl->img_x].x = x;
+			e->point[x + y * ftl->img_x].y = y;
 			x++;
 		}
 		y++;

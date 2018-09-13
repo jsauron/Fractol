@@ -18,8 +18,8 @@ void	init_mandel(t_fractal *ftl)
 	ftl->x2 = 0.6;
 	ftl->y1 = -1.2;
 	ftl->y2 = 1.2;
-	ftl->img_x = 900;
-	ftl->img_y = 700;
+	ftl->img_x = 700;
+	ftl->img_y = 750;
 	ftl->zoom_x = ftl->img_x / (ftl->x2 - ftl->x1);
 	ftl->zoom_y = ftl->img_y / (ftl->y2 - ftl->y1);
 	ftl->it_max = 50;

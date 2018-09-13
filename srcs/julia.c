@@ -18,7 +18,7 @@ void	init_julia(t_fractal *ftl)
 	ftl->x2 = 1;
 	ftl->y1 = -1.2;
 	ftl->y2 = 1.2;
-	ftl->img_x = 700;
+	ftl->img_x = 650;
 	ftl->img_y = 800;
 	ftl->zoom_x = ftl->img_x / (ftl->x2 - ftl->x1);
 	ftl->zoom_y = ftl->img_y / (ftl->y2 - ftl->y1);
