@@ -26,8 +26,6 @@ void	key_move(t_env *e, int key)
 
 void	move(t_env *e, t_fractal *ftl, float move_x, float move_y)
 {
-	printf("zoom_x = %d\n", ftl->zoom_x);
-	printf("zoom_y = %d\n", ftl->zoom_y);
 	ftl->x1 += (move_x / (ftl->zoom_x / 259 ));
 	ftl->x2 += (move_x / (ftl->zoom_x / 259 ));
 	ftl->y1 += (move_y / (ftl->zoom_y / 312 ));
@@ -54,10 +52,6 @@ void	zoom(t_env *e, int x, int y, float zoom)
 	double	tmp_x;
 	double	tmp_y;
 
-	printf("zoom = %f\n", zoom);
-	printf("e->ftl.it_max = %d\n", e->ftl.it_max);
-	if (e->ftl.it_max == 19  && zoom == 1.050000)
-		return;
 	tmp_x = (((e->ftl.x2 - e->ftl.x1) *
 				(double)x / e->ftl.img_x) + e->ftl.x1);
 	tmp_y = (((e->ftl.y2 - e->ftl.y1) *
@@ -66,13 +60,13 @@ void	zoom(t_env *e, int x, int y, float zoom)
 	e->ftl.x2 = tmp_x + (e->ftl.x2 - tmp_x) * zoom;
 	e->ftl.y1 = tmp_y - (tmp_y - e->ftl.y1) * zoom;
 	e->ftl.y2 = tmp_y + (e->ftl.y2 - tmp_y) * zoom;
-	e->ftl.it_max /= zoom;
+	e->itmax_tmp /= zoom;
+	e->ftl.it_max = e->itmax_tmp ;
 	e->ftl.zoom_x = e->ftl.img_x / (e->ftl.x2 - e->ftl.x1);
 	e->ftl.zoom_y = e->ftl.img_y / (e->ftl.y2 - e->ftl.y1);
 	init_matrice(e);
 	clear_img(e);
 	draw(e, &e->ftl, &e->image);
-
 }
 
 void	change_fractal(t_env *e)
@@ -90,13 +84,11 @@ void	change_fractal(t_env *e)
 	init_img(e);
 	init_point(e, &e->ftl);
 	e->pool = threadpool_create(12, e->ftl.img_x * e->ftl.img_y);
-	printf("la\n");
 	draw(e, &e->ftl, &e->image);
 }
 
 void	reset(t_env *e)
 {
-	printf("reset\n");
 	clear_img(e);
 	init_fractal(e);
 	free(e->point);

@@ -143,18 +143,3 @@ int		unicorn_color(t_env *e, int i)
 		index -= 8;
 	return (color[index]);
 }
-
-void	help(t_env* e)
-{
-	int static i;
-
-printf("i = %d\n", i);
-	if (i > 1)
-		i = 0;
-	init_matrice(e);
-	clear_img(e);
-	draw(e, &e->ftl, &e->image);
-	if (i == 0)
-		put_info_in_window(e);
-	i++;
-}

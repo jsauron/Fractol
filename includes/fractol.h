@@ -57,10 +57,10 @@
 # define ZOOM_LESS 24
 # define PAD_PLUS 4
 #define PAD_LESS 5
-# define MOVE_UP 126
-# define MOVE_DOWN 125
-# define MOVE_RIGHT 124
-# define MOVE_LEFT 123
+# define MOVE_UP 125
+# define MOVE_DOWN 126
+# define MOVE_RIGHT 123
+# define MOVE_LEFT 124
 # define ROT_X 7
 # define ROT_Y 16
 # define ROT_Z 13
@@ -98,12 +98,6 @@ typedef struct		s_point
 	double		z;
 
 }			t_point;
-
-//typedef struct		s_line
-//{
-//	t_point		*point;
-//
-//}			t_line;
 
 typedef struct		s_complex
 {
@@ -163,7 +157,6 @@ typedef	struct		s_env
 	int		number;
 	t_img		image;
 	t_matrice	m;
-//	t_line		*line;
 	t_point		*point;
 	int		center_y;
 	int		center_x;
@@ -171,6 +164,8 @@ typedef	struct		s_env
 	t_arg		*arg;
 	int		color;
 	int		c;
+	double		itmax_tmp;
+	int		h;
 	t_atom	 atom;
 
 }			t_env;
@@ -236,6 +231,9 @@ void    calc_all_points(t_env *e,t_fractal *ftl);
 void    draw(t_env *e, t_fractal *ftl, t_img *image);
 void    calc_fractal(void *arguments);
 void    calc_fractal_2(t_env *e, t_coord *coord, int x, int y);
+void    calc_buddha_complex(t_fractal *ftl, int i, t_complex cmp, t_coord *coord);
+int     calc_complex(t_env *e,t_fractal *ftl, t_complex cmp, t_coord *coord);
+void    set_pixel(t_env *e, t_fractal *ftl, int x , int y);
 
 /*
 **      draw_3D.c

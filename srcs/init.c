@@ -23,6 +23,7 @@ void	check_fractal(int ac, char **av, t_env *e)
 		get_number(e, av);
 		init_matrice(e);
 		e->c = 0;
+		e->h = 0;
 	}
 	else
 		arg_invalid();

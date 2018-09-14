@@ -59,6 +59,7 @@ void	init_fractal(t_env *e)
 		init_julia(&e->ftl);
 	else if (e->number == 3)
 		init_buddhabrot(&e->ftl);
+	e->itmax_tmp = e->ftl.it_max;
 }
 
 void	init_fractal_2(t_env *e, t_fractal *ftl, t_complex *cmp, t_point *p)

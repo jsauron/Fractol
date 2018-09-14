@@ -39,6 +39,17 @@ int		key(int key, t_env *e)
 	return (0);
 }
 
+void	help(t_env *e)
+{
+	if (e->h == 0)
+		e->h = 1;
+	else
+		e->h = 0;
+	clear_img(e);
+	init_matrice(e);
+	draw(e, &e->ftl, &e->image);
+}
+
 int		motion_notify(int x, int y, t_env *e)
 {
 	e->ftl.mouse_x = x;
