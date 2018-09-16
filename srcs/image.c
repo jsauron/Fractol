@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/04 15:32:40 by jsauron           #+#    #+#             */
-/*   Updated: 2018/09/04 15:33:53 by jsauron          ###   ########.fr       */
+/*   Updated: 2018/09/16 14:56:47 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ void	put_info_in_window(t_env *e)
 	mlx_string_put(e->mlx, e->win, 20, 120, PINK, " RESET : R");
 	mlx_string_put(e->mlx, e->win, 20, 140, PINK, " SWITCH : ENTER");
 	mlx_string_put(e->mlx, e->win, 20, 160, CYAN, " iteration max : ");
-	mlx_string_put(e->mlx, e->win, 180, 160, CYAN,  ft_itoa(e->ftl.it_max));
+	mlx_string_put(e->mlx, e->win, 180, 160, CYAN, ft_itoa(e->ftl.it_max));
 }

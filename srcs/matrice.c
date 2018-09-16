@@ -6,11 +6,24 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/04 15:41:11 by jsauron           #+#    #+#             */
-/*   Updated: 2018/09/04 15:41:28 by jsauron          ###   ########.fr       */
+/*   Updated: 2018/09/16 14:42:11 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
+
+void	calc_all_points(t_env *e, t_fractal *ftl)
+{
+	int		y;
+
+	y = 0;
+	while (y < ftl->img_y)
+	{
+		threadpool_add(e->pool, calc_fractal,
+				&e->arg[y]);
+		y++;
+	}
+}
 
 void	calc_matrice(t_env *e, t_matrice *m, t_point *p)
 {

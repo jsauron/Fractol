@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/04 15:31:34 by jsauron           #+#    #+#             */
-/*   Updated: 2018/09/06 16:32:46 by jsauron          ###   ########.fr       */
+/*   Updated: 2018/09/16 17:02:36 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,8 @@ int		key(int key, t_env *e)
 	if (key == RESET)
 		reset(e);
 	if (key == HELP)
-		help(e); 
-	printf("%d\n", key);
+		help(e);
 	return (0);
-}
-
-void	help(t_env *e)
-{
-	if (e->h == 0)
-		e->h = 1;
-	else
-		e->h = 0;
-	clear_img(e);
-	init_matrice(e);
-	draw(e, &e->ftl, &e->image);
 }
 
 int		motion_notify(int x, int y, t_env *e)
@@ -62,8 +50,7 @@ int		button_press(int key, int x, int y, t_env *e)
 	if (key == CLIK || key == PAD_PLUS)
 		zoom(e, x, y, 0.95);
 	if (key == PAD_LESS)
-		zoom(e, x ,y, 1.05);
-	printf(" %d\n", key);
+		zoom(e, x, y, 1.05);
 	return (0);
 }
 
@@ -71,10 +58,4 @@ int		destroy_notify(t_env *e)
 {
 	exit_win(e);
 	return (0);
-}
-
-void	exit_win(t_env *e)
-{
-	mlx_destroy_window(e->mlx, e->win);
-	exit(1);
 }

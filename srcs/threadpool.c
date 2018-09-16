@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/04 15:41:45 by jsauron           #+#    #+#             */
-/*   Updated: 2018/09/04 15:51:28 by jsauron          ###   ########.fr       */
+/*   Updated: 2018/09/16 16:35:36 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ static void		*threadpool_thread(void *threadpool)
 t_threadpool	*threadpool_create(int thread_count, int queue_size)
 {
 	t_threadpool	*pool;
-	int				i;
 
-	i = 0;
 	if (thread_count <= 0 || thread_count > MAX_THREADS ||
 			queue_size <= 0 || queue_size > MAX_QUEUE)
 		return (NULL);
@@ -54,6 +52,15 @@ t_threadpool	*threadpool_create(int thread_count, int queue_size)
 		err_pool(pool);
 	if (init_pool(pool, queue_size, thread_count) == 0)
 		return (NULL);
+	thread_c(pool, thread_count);
+	return (pool);
+}
+
+t_threadpool	*thread_c(t_threadpool *pool, int thread_count)
+{
+	int		i;
+
+	i = 0;
 	while (i < thread_count)
 	{
 		if (pthread_create(&(pool->threads[i]), NULL,
@@ -63,8 +70,6 @@ t_threadpool	*threadpool_create(int thread_count, int queue_size)
 			return (NULL);
 		}
 		pool->thread_count++;
-		printf("thread_count = %d\n", pool->thread_count);
-		printf("started = %d\n", pool->started);
 		pool->started++;
 		i++;
 	}
@@ -72,7 +77,7 @@ t_threadpool	*threadpool_create(int thread_count, int queue_size)
 }
 
 int				threadpool_add(t_threadpool *pool,
-								void (*function)(void *), void *argument)
+		void (*function)(void *), void *argument)
 {
 	int		err;
 	int		next;
@@ -98,37 +103,5 @@ int				threadpool_add(t_threadpool *pool,
 	}
 	if (pthread_mutex_unlock(&pool->lock))
 		err = threadpool_lock_failure;
-	return (err);
-}
-
-int				threadpool_destroy(t_threadpool *pool, int flags)
-{
-	int		i;
-	int		err;
-
-	i = 0;
-	err = 0;
-	if (pool == NULL)
-		return (threadpool_invalid);
-	if (pthread_mutex_lock(&(pool->lock)))
-		return (threadpool_lock_failure);
-	if (pool->shutdown)
-		err = threadpool_shutdown;
-	else
-	{
-		pool->shutdown = (flags & threadpool_graceful) ?
-			graceful_shutdown : immediate_shutdown;
-		if ((pthread_cond_broadcast(&(pool->notify))) ||
-			(pthread_mutex_unlock(&(pool->lock))))
-			err = threadpool_lock_failure;
-		while (i < pool->thread_count)
-		{
-			if (pthread_join(pool->threads[i], NULL))
-				err = threadpool_thread_failure;
-			i++;
-		}
-	}
-	if (!err)
-		threadpool_free(pool);
 	return (err);
 }

@@ -6,7 +6,7 @@
 #    By: jsauron <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/29 23:58:29 by jsauron           #+#    #+#              #
-#    Updated: 2018/09/04 21:11:26 by jsauron          ###   ########.fr        #
+#    Updated: 2018/09/16 16:27:12 by jsauron          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
  NAME = fractol
@@ -21,14 +21,15 @@
 	srcs/init.c \
 	srcs/init_fractal.c \
 	srcs/tools.c \
+	srcs/color.c \
 	srcs/matrice.c \
-	srcs/draw_3D.c \
 	srcs/threadpool.c \
 	srcs/threadpool_helper.c\
 	srcs/buddha.c\
 	srcs/julia.c \
 	srcs/mandelbrot.c\
-	srcs/event.c
+	srcs/event.c \
+	srcs/event_2.c
 
 OBJS = $(SRC:.c=.o)
 

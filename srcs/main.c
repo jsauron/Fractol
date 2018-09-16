@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/30 00:27:19 by jsauron           #+#    #+#             */
-/*   Updated: 2018/09/04 15:40:01 by jsauron          ###   ########.fr       */
+/*   Updated: 2018/09/16 16:36:12 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ int		main(int ac, char **av)
 
 	check_fractal(ac, av, &e);
 	init(&e);
-	printf(" threadpool = %d\n", e.ftl.img_x * e.ftl.img_y);
 	e.pool = threadpool_create(12, e.ftl.img_x * e.ftl.img_y);
-	printf("pool = %d\n", (int)e.pool);
 	get_center(&e);
 	draw(&e, &e.ftl, &e.image);
 	mlx_hook(e.win, 2, 1, key, &e);

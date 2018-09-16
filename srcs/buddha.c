@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/04 15:24:27 by jsauron           #+#    #+#             */
-/*   Updated: 2018/09/05 20:42:27 by jsauron          ###   ########.fr       */
+/*   Updated: 2018/09/16 14:37:14 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,15 @@ void	draw_buddha(t_env *e, t_fractal *ftl, t_img *image)
 		while (x < ftl->img_x)
 		{
 			set_pixel_img(e, x, y,
-					 buddha_color(e, (image->data[x + y * ftl->img_x] )));
+					buddha_color(e, (image->data[x + y * ftl->img_x])));
 			x++;
 		}
 		y++;
 	}
 }
 
-void	add_pix_buddha(t_env *e, t_coord *coord, int x, int y, int i)
+void	add_pix_buddha(t_env *e, t_coord *coord, int i)
 {
-	x = 0;
-	y = 0;
 	while (i > 0)
 	{
 		i--;
