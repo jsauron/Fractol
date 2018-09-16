@@ -26,15 +26,20 @@ void	key_move(t_env *e, int key)
 
 void	move(t_env *e, t_fractal *ftl, float move_x, float move_y)
 {
-	ftl->x1 += (move_x / (ftl->zoom_x / 259 ));
-	ftl->x2 += (move_x / (ftl->zoom_x / 259 ));
-	ftl->y1 += (move_y / (ftl->zoom_y / 312 ));
-	ftl->y2 += (move_y / (ftl->zoom_y / 312 ));
-	ftl->zoom_x = ftl->img_x / (ftl->x2 - ftl->x1);
-	ftl->zoom_y = ftl->img_y / (ftl->y2 - ftl->y1);
-	init_matrice(e);
-	clear_img(e);
-	draw(e, ftl, &e->image);
+	if (ftl->zoom_x < 259 || ftl->zoom_y < 312)
+	{
+		ftl->zoom_x = 259;
+		ftl->zoom_y = 312;		
+	}
+		ftl->x1 += (move_x / (ftl->zoom_x / 259 ));
+		ftl->x2 += (move_x / (ftl->zoom_x / 259 ));
+		ftl->y1 += (move_y / (ftl->zoom_y / 312 ));
+		ftl->y2 += (move_y / (ftl->zoom_y / 312 ));
+		ftl->zoom_x = ftl->img_x / (ftl->x2 - ftl->x1);
+		ftl->zoom_y = ftl->img_y / (ftl->y2 - ftl->y1);
+		init_matrice(e);
+		clear_img(e);
+		draw(e, ftl, &e->image);
 }
 
 void	rot(t_env *e, int key)
@@ -51,7 +56,9 @@ void	zoom(t_env *e, int x, int y, float zoom)
 {
 	double	tmp_x;
 	double	tmp_y;
-
+	
+	if (e->ftl.it_max > 62000)
+		zoom = 1.05;	
 	tmp_x = (((e->ftl.x2 - e->ftl.x1) *
 				(double)x / e->ftl.img_x) + e->ftl.x1);
 	tmp_y = (((e->ftl.y2 - e->ftl.y1) *

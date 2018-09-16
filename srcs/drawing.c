@@ -64,9 +64,9 @@ void	set_pixel(t_env *e, t_fractal *ftl,  int x , int y)
 	t_point		*p;
 	int		i;
 
-	 p = &e->point[x + y * ftl->img_x];
-         calc_matrice(e, &e->m, p);
-         init_fractal_2(e, ftl, &cmp, p);
+	p = &e->point[x + y * ftl->img_x];
+        calc_matrice(e, &e->m, p);
+        init_fractal_2(e, ftl, &cmp, p);
 	i = calc_complex(e, ftl , cmp, coord);
 	if (i == e->ftl.it_max && (e->number == 1 || e->number == 2))
 	{
