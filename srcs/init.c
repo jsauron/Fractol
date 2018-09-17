@@ -24,6 +24,7 @@ void	check_fractal(int ac, char **av, t_env *e)
 		init_matrice(e);
 		e->c = 0;
 		e->h = 0;
+		pthread_mutex_init(&e->atom_mutex, NULL);
 	}
 	else
 		arg_invalid();

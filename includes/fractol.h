@@ -19,7 +19,7 @@
 # include <math.h>
 # include <pthread.h>
 # include "threadpool.h"
-
+# include <stdio.h>
 /*
 **       Colors text
 */
@@ -173,7 +173,8 @@ typedef	struct		s_env
 	int				c;
 	double			itmax_tmp;
 	int				h;
-	volatile _Atomic int	atom;
+	int				atom;
+	pthread_mutex_t			atom_mutex;
 
 }					t_env;
 
@@ -311,4 +312,11 @@ void				err_malloc(void);
 void				arg_invalid(void);
 void				image_err(void);
 
+#ifndef DG
+# define DGMSG0	"\033[34m%s, \033[36m%s, \033[32m%4d - \033[31m"
+# define DGMSG1	__FILE__, __func__, __LINE__
+# define DG(f, ...) dprintf(2, DGMSG0 f "\033[0m\n", DGMSG1, ##__VA_ARGS__)
 #endif
+
+#endif
+
