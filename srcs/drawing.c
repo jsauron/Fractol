@@ -16,10 +16,8 @@ void	draw(t_env *e, t_fractal *ftl, t_img *image)
 {	
 	e->atom = 0;
 	calc_all_points(e, ftl);
-	DG();
-	while (e->atom != ftl->img_x * ftl->img_y)
+	while (e->atom != ftl->img_y)
 		;
-	DG();
 	if (e->number == 3)
 		draw_buddha(e, ftl, image);
 	mlx_put_image_to_window(e->mlx, e->win, image->img, 0, 0);
@@ -41,12 +39,11 @@ void	calc_fractal(void *arguments)
 	while (x < ftl->img_x)
 	{
 		set_pixel(e, ftl, x, y);
-		pthread_mutex_lock(&e->atom_mutex);
-		e->atom++;
-		printf("atom = %d\n", e->atom);
-		pthread_mutex_unlock(&e->atom_mutex);
 		x++;
 	}
+	pthread_mutex_lock(&e->atom_mutex);
+        e->atom++;
+       	pthread_mutex_unlock(&e->atom_mutex);
 }
 
 void	set_pixel(t_env *e, t_fractal *ftl, int x, int y)

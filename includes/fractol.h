@@ -173,7 +173,7 @@ typedef	struct		s_env
 	int				c;
 	double			itmax_tmp;
 	int				h;
-	int				atom;
+	volatile int				atom;
 	pthread_mutex_t			atom_mutex;
 
 }					t_env;
