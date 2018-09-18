@@ -41,8 +41,8 @@ void		threadpool_dest_check(t_threadpool *pool, int flags, int err)
 	i = 0;
 	pool->shutdown = (flags & threadpool_graceful) ?
 		graceful_shutdown : immediate_shutdown;
-	if ((pthread_cond_broadcast(&(pool->notify))) ||
-			(pthread_mutex_unlock(&(pool->lock))))
+	if ((pthread_cond_broadcast(&(pool->notify)))
+		||(pthread_mutex_unlock(&(pool->lock))))
 		err = threadpool_lock_failure;
 	while (i < pool->thread_count)
 	{
@@ -64,9 +64,9 @@ int			init_pool(t_threadpool *pool, int queue_size, int thread_count)
 	pool->threads = (pthread_t *)malloc(sizeof(pthread_t) * thread_count);
 	pool->queue =
 		(t_threadpool_task *)malloc(sizeof(t_threadpool_task) * queue_size);
-	if ((pthread_mutex_init(&(pool->lock), NULL)) ||
-			(pthread_cond_init(&(pool->notify), NULL)) ||
-			(pool->threads == NULL) || (pool->queue == NULL))
+	if ((pthread_mutex_init(&(pool->lock), NULL))
+			|| (pthread_cond_init(&(pool->notify), NULL))
+			|| (pool->threads == NULL) || (pool->queue == NULL))
 		err_pool(pool);
 	return (1);
 }

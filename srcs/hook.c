@@ -16,8 +16,8 @@ int		key(int key, t_env *e)
 {
 	if (key == ESC)
 		exit_win(e);
-	if (key == MOVE_UP || key == MOVE_DOWN ||
-			key == MOVE_RIGHT || key == MOVE_LEFT)
+	if (key == MOVE_UP || key == MOVE_DOWN
+				|| key == MOVE_RIGHT || key == MOVE_LEFT)
 		key_move(e, key);
 	if (key == ZOOM_PLUS)
 		zoom(e, e->center_x, e->center_y, 0.95);

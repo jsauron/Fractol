@@ -32,11 +32,11 @@ void	put_info_in_window(t_env *e)
 {
 	mlx_string_put(e->mlx, e->win, 20, 20, PINK, " MOVE : < ^ > v ");
 	mlx_string_put(e->mlx, e->win, 20, 40, PINK, " ZOOM : + - / CLICK / PAD");
-	mlx_string_put(e->mlx, e->win, 20, 60, PINK, " ROTATION : Z");
+	mlx_string_put(e->mlx, e->win, 20, 60, PINK, " ROT Z : Z");
 	mlx_string_put(e->mlx, e->win, 20, 80, PINK, " STOP ROT : SPACE");
 	mlx_string_put(e->mlx, e->win, 20, 100, PINK, " COLOR : SHIFT");
 	mlx_string_put(e->mlx, e->win, 20, 120, PINK, " RESET : R");
-	mlx_string_put(e->mlx, e->win, 20, 140, PINK, " SWITCH : ENTER");
+	mlx_string_put(e->mlx, e->win, 20, 140, PINK, " QUIT : ESC");
 	mlx_string_put(e->mlx, e->win, 20, 160, CYAN, " iteration max : ");
 	mlx_string_put(e->mlx, e->win, 180, 160, CYAN, ft_itoa(e->ftl.it_max));
 }

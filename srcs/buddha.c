@@ -57,10 +57,10 @@ void	add_pix_buddha(t_env *e, t_coord *coord, int i)
 	while (i > 0)
 	{
 		i--;
-		if ((coord[i].x > 0 &&
-					coord[i].x < e->ftl.img_x) &&
-				(coord[i].y > 0 &&
-				coord[i].y < e->ftl.img_y))
+		if ((coord[i].x > 0
+				&& coord[i].x < e->ftl.img_x)
+				&& (coord[i].y > 0
+				&& coord[i].y < e->ftl.img_y))
 		{
 			e->image.data[coord[i].x + coord[i].y * e->ftl.img_x] += 1;
 		}

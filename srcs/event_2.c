@@ -19,10 +19,10 @@ void	zoom(t_env *e, int x, int y, float zoom)
 
 	if (e->ftl.it_max > 62000)
 		zoom = 1.05;
-	tmp_x = (((e->ftl.x2 - e->ftl.x1) *
-				(double)x / e->ftl.img_x) + e->ftl.x1);
-	tmp_y = (((e->ftl.y2 - e->ftl.y1) *
-				(double)y / e->ftl.img_y) + e->ftl.y1);
+	tmp_x = (((e->ftl.x2 - e->ftl.x1)
+				* (double)x / e->ftl.img_x) + e->ftl.x1);
+	tmp_y = (((e->ftl.y2 - e->ftl.y1)
+				* (double)y / e->ftl.img_y) + e->ftl.y1);
 	e->ftl.x1 = tmp_x - (tmp_x - e->ftl.x1) * zoom;
 	e->ftl.x2 = tmp_x + (e->ftl.x2 - tmp_x) * zoom;
 	e->ftl.y1 = tmp_y - (tmp_y - e->ftl.y1) * zoom;

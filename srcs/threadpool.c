@@ -24,9 +24,9 @@ static void		*threadpool_thread(void *threadpool)
 		pthread_mutex_lock(&(pool->lock));
 		while ((pool->count == 0) && (!pool->shutdown))
 			pthread_cond_wait(&(pool->notify), &(pool->lock));
-		if ((pool->shutdown == immediate_shutdown) ||
-				((pool->shutdown == graceful_shutdown) &&
-				(pool->count == 0)))
+		if ((pool->shutdown == immediate_shutdown)
+				|| ((pool->shutdown == graceful_shutdown)
+				&& (pool->count == 0)))
 			break ;
 		task.function = pool->queue[pool->head].function;
 		task.argument = pool->queue[pool->head].argument;

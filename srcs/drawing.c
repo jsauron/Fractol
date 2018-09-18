@@ -92,8 +92,8 @@ int		calc_complex(t_env *e, t_fractal *ftl, t_complex cmp, t_coord *coord)
 
 void	calc_buddha(t_fractal *ftl, int i, t_complex cmp, t_coord *coord)
 {
-	coord[i].x = (cmp.z_r - ftl->x1) *
-		(double)ftl->zoom_x;
-	coord[i].y = (cmp.z_i - ftl->y1) *
-		(double)ftl->zoom_y;
+	coord[i].x = (cmp.z_r - ftl->x1)
+		* (double)ftl->zoom_x;
+	coord[i].y = (cmp.z_i - ftl->y1)
+		* (double)ftl->zoom_y;
 }
